@@ -44,6 +44,8 @@ final String html = HTML(
 
 A more complete example can be found in the [example](example) directory.
 
+A full usage demonstration can be seen on my portfolio website: [github.com/TechnicJelle/TechnicJelle](https://github.com/TechnicJelle/TechnicJelle)
+
 ## Additional information
 
 Feel free to make feature requests and PRs [on GitHub](https://github.com/TechnicJelle/techs_html_bindings).
