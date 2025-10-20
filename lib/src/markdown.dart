@@ -4,14 +4,14 @@ import "package:techs_html_bindings/elements.dart";
 
 //TODO: Make not terrible
 
-const String h1 = "# ";
-const String h2 = "## ";
-const String h3 = "### ";
-const String h4 = "#### ";
-const String h5 = "##### ";
-const String h6 = "###### ";
-const commentStart = "<!-- ";
-const commentEnd = "-->";
+const String _h1 = "# ";
+const String _h2 = "## ";
+const String _h3 = "### ";
+const String _h4 = "#### ";
+const String _h5 = "##### ";
+const String _h6 = "###### ";
+const _commentStart = "<!-- ";
+const _commentEnd = "-->";
 
 List<Element> markdown(File file) {
   final List<String> contents = file.readAsLinesSync();
@@ -21,27 +21,27 @@ List<Element> markdown(File file) {
   for (int i = 0; i < contents.length; i++) {
     final String line = contents[i];
 
-    if (line.endsWith(commentEnd)) {
+    if (line.endsWith(_commentEnd)) {
       disabled = false;
       continue;
-    } else if (line.startsWith(commentStart)) {
+    } else if (line.startsWith(_commentStart)) {
       disabled = true;
     }
 
     if (disabled) continue;
 
-    if (line.startsWith(h1)) {
-      elements.add(H1(children: [T(line.replaceFirst(h1, ""))]));
-    } else if (line.startsWith(h2)) {
-      elements.add(H2(children: [T(line.replaceFirst(h2, ""))]));
-    } else if (line.startsWith(h3)) {
-      elements.add(H2(children: [T(line.replaceFirst(h3, ""))]));
-    } else if (line.startsWith(h4)) {
-      elements.add(H2(children: [T(line.replaceFirst(h4, ""))]));
-    } else if (line.startsWith(h5)) {
-      elements.add(H2(children: [T(line.replaceFirst(h5, ""))]));
-    } else if (line.startsWith(h6)) {
-      elements.add(H2(children: [T(line.replaceFirst(h6, ""))]));
+    if (line.startsWith(_h1)) {
+      elements.add(H1(children: [T(line.replaceFirst(_h1, ""))]));
+    } else if (line.startsWith(_h2)) {
+      elements.add(H2(children: [T(line.replaceFirst(_h2, ""))]));
+    } else if (line.startsWith(_h3)) {
+      elements.add(H2(children: [T(line.replaceFirst(_h3, ""))]));
+    } else if (line.startsWith(_h4)) {
+      elements.add(H2(children: [T(line.replaceFirst(_h4, ""))]));
+    } else if (line.startsWith(_h5)) {
+      elements.add(H2(children: [T(line.replaceFirst(_h5, ""))]));
+    } else if (line.startsWith(_h6)) {
+      elements.add(H2(children: [T(line.replaceFirst(_h6, ""))]));
     } else {
       final RegExp image = RegExp(r"!\[(.*?)\]\((.*?)\)");
       final RegExp link = RegExp(r"\[(.*?)\]\((.*?)\)");
