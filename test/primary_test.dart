@@ -2,12 +2,12 @@ import "package:techs_html_bindings/elements.dart";
 import "package:test/test.dart";
 
 void main() {
-  group("A group of tests", () {
+  group("Primary tests", () {
     setUp(() {
       // Additional setup goes here.
     });
 
-    test("First Test", () {
+    test("1", () {
       final html = HTML(
         lang: "en",
         head: Head(title: "Test"),
