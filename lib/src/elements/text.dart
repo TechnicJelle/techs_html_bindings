@@ -1,4 +1,4 @@
-import "package:ssg/html/base.dart";
+import "package:techs_html_bindings/techs_html_bindings.dart";
 
 class T extends Element {
   String text;

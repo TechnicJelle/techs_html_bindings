@@ -1,7 +1,5 @@
-import "package:ssg/html/body.dart";
-import "package:ssg/html/head.dart";
-import "package:ssg/html/text.dart";
-import "package:ssg/utils.dart";
+import "package:techs_html_bindings/src/utils.dart";
+import "package:techs_html_bindings/techs_html_bindings.dart";
 
 abstract class Element {
   Iterable<Element> children;

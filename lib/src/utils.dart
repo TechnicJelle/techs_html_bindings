@@ -1,6 +1,6 @@
 import "dart:convert";
 
-import "package:ssg/html/base.dart";
+import "package:techs_html_bindings/techs_html_bindings.dart";
 
 const HtmlEscape _htmlEscape = HtmlEscape();
 

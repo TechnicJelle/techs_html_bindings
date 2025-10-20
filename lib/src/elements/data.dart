@@ -1,4 +1,4 @@
-import "package:ssg/html.dart";
+import "package:techs_html_bindings/techs_html_bindings.dart";
 
 class Address extends Element {
   Address({

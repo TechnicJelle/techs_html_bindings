@@ -1,21 +1,35 @@
 import "dart:io";
 
-import "package:ssg/html.dart";
+import "package:techs_html_bindings/techs_html_bindings.dart";
 
 //TODO: Make not terrible
+
+const String h1 = "# ";
+const String h2 = "## ";
+const String h3 = "### ";
+const String h4 = "#### ";
+const String h5 = "##### ";
+const String h6 = "###### ";
+const commentStart = "<!-- ";
+const commentEnd = "-->";
 
 List<Element> markdown(File file) {
   final List<String> contents = file.readAsLinesSync();
   final List<Element> elements = [];
+  bool disabled = false;
+
   for (int i = 0; i < contents.length; i++) {
     final String line = contents[i];
 
-    const String h1 = "# ";
-    const String h2 = "## ";
-    const String h3 = "### ";
-    const String h4 = "#### ";
-    const String h5 = "##### ";
-    const String h6 = "###### ";
+    if (line.endsWith(commentEnd)) {
+      disabled = false;
+      continue;
+    } else if (line.startsWith(commentStart)) {
+      disabled = true;
+    }
+
+    if (disabled) continue;
+
     if (line.startsWith(h1)) {
       elements.add(H1(children: [T(line.replaceFirst(h1, ""))]));
     } else if (line.startsWith(h2)) {
@@ -28,8 +42,6 @@ List<Element> markdown(File file) {
       elements.add(H2(children: [T(line.replaceFirst(h5, ""))]));
     } else if (line.startsWith(h6)) {
       elements.add(H2(children: [T(line.replaceFirst(h6, ""))]));
-    } else if (line.startsWith("<!---")) {
-      //ignore
     } else {
       final RegExp image = RegExp(r"!\[(.*?)\]\((.*?)\)");
       final RegExp link = RegExp(r"\[(.*?)\]\((.*?)\)");

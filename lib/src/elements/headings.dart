@@ -1,6 +1,5 @@
-import "package:ssg/html/base.dart";
-import "package:ssg/html/text.dart";
-import "package:ssg/utils.dart";
+import "package:techs_html_bindings/src/utils.dart";
+import "package:techs_html_bindings/techs_html_bindings.dart";
 
 class Hn extends Element {
   ///Override this if you want the automatic links to have a different class.
