@@ -1,5 +1,5 @@
+import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/src/utils.dart";
-import "package:techs_html_bindings/techs_html_bindings.dart";
 
 class Head extends Element {
   String title;

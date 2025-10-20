@@ -1,7 +1,7 @@
 import "dart:io";
 
-import "package:techs_html_bindings/src/markdown.dart";
-import "package:techs_html_bindings/techs_html_bindings.dart";
+import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/markdown.dart";
 
 void main() {
   File("index.html").writeAsStringSync(

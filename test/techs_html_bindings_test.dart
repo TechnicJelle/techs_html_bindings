@@ -1,4 +1,4 @@
-import "package:techs_html_bindings/techs_html_bindings.dart";
+import "package:techs_html_bindings/elements.dart";
 import "package:test/test.dart";
 
 void main() {

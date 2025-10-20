@@ -1,4 +1,4 @@
-import "package:techs_html_bindings/techs_html_bindings.dart";
+import "package:techs_html_bindings/elements.dart";
 
 class Div extends Element {
   Div({
