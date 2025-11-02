@@ -33,6 +33,9 @@ jobs:
       - name: Setup Dart SDK
         uses: dart-lang/setup-dart@v1
 
+      - name: Install dependencies
+        run: dart pub get
+
       - name: Generate Docs Website
         run: dart doc
 
