@@ -4,7 +4,7 @@ version: 1.0.0
 repository: https://github.com/TechnicJelle/techs_html_bindings
 
 environment:
-  sdk: ^3.9.2
+  sdk: ^3.8.1
 
 dependencies:
   image: ^4.5.4
