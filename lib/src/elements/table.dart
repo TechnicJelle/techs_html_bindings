@@ -10,7 +10,7 @@ class Table extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: []);
+  }) : super(children: [head, body]);
 
   @override
   String build() {
@@ -22,19 +22,19 @@ class Table extends Element {
 }
 
 class TableHead extends Element {
-  TableRowH row;
+  List<TableRowH> rows;
 
   TableHead({
-    required this.row,
+    required this.rows,
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: []);
+  }) : super(children: rows);
 
   @override
   String build() {
     return "<thead$modifiers>\n"
-        "${row.build()}\n"
+        '${rows.map((el) => el.build()).join("\n")}\n'
         "</thead>";
   }
 }
@@ -47,7 +47,7 @@ class TableRowH extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: []);
+  }) : super(children: headers);
 
   @override
   String build() {
@@ -81,7 +81,7 @@ class TableBody extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: []);
+  }) : super(children: rows);
 
   @override
   String build() {
@@ -99,7 +99,7 @@ class TableRowB extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: []);
+  }) : super(children: cells);
 
   @override
   String build() {
