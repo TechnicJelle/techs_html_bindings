@@ -50,4 +50,4 @@ A full usage demonstration can be seen on my portfolio website: [github.com/Tech
 
 Feel free to make feature requests and PRs [on GitHub](https://github.com/TechnicJelle/techs_html_bindings).
 
-But do not request anything related to JavaScript, because that is explicitly a non-goal for this library.
+But **do not** request anything related to JavaScript, because that is explicitly a non-goal for this library.

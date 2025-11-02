@@ -114,3 +114,14 @@ class Em extends Element {
         "</em>";
   }
 }
+
+class Strong extends Element {
+  Strong({required super.children});
+
+  @override
+  String build() {
+    return "<strong>"
+        "${children.map((el) => el.build()).join()}"
+        "</strong>";
+  }
+}
