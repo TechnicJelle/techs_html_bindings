@@ -51,7 +51,8 @@ class HTML extends Element {
 
   @override
   String build() {
-    return '<html lang="$lang">\n'
+    return "<!DOCTYPE html>\n"
+        '<html lang="$lang">\n'
         "${head.build()}\n\n"
         "${body.build()}\n"
         "</html>";
