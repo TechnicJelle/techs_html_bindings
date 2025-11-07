@@ -27,6 +27,7 @@ I might upload it on [pub.dev](https://pub.dev/) later, once it's more complete 
 Short example:
 
 ```dart
+
 final String html = HTML(
   lang: "en",
   head: Head(title: "Hello bindings!"),
@@ -46,7 +47,16 @@ A more complete example can be found in the [example](example) directory.
 
 The API Documentation can be found [here](https://technicjelle.com/techs_html_bindings/).
 
-A full usage demonstration can be seen on my portfolio website: [github.com/TechnicJelle/TechnicJelle](https://github.com/TechnicJelle/TechnicJelle)
+A full usage demonstration can be seen on my portfolio website:
+[github.com/TechnicJelle/TechnicJelle](https://github.com/TechnicJelle/TechnicJelle)
+
+### A few notes
+
+Strings are _not_ escaped/sanitized automatically, so be mindful of XSS vulnerabilities.
+([This may change in the future.](https://github.com/TechnicJelle/techs_html_bindings/issues/5))\
+(Image alt text _is_ escaped automatically, though.)
+
+You can use the `.escape()` extension method on `String`s to manually escape things.
 
 ## Additional information
 
