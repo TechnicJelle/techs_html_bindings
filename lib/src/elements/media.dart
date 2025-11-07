@@ -55,3 +55,79 @@ class Image extends Element {
     return "";
   }
 }
+
+enum VideoControl { noDownload, noFullscreen, noRemotePlayback }
+
+extension ControlsListArg on Set<VideoControl>? {
+  String arg({required bool controls}) {
+    final Set<VideoControl>? set = this;
+    if (set == null) return "";
+    if (!controls) return "";
+    return ' controlslist="${set.map((e) => e.name.toLowerCase()).join(" ")}"';
+  }
+}
+
+class Video extends Element {
+  String src;
+  int? width;
+  int? height;
+  bool autoplay;
+  bool controls;
+  Set<VideoControl>? controlsList;
+  bool disablePictureInPicture;
+  bool disableRemotePlayback;
+  bool loop;
+  bool muted;
+  bool playsInline;
+
+  Video({
+    required this.src,
+    this.width,
+    this.height,
+    this.autoplay = false,
+    this.controls = false,
+    this.controlsList,
+    this.disablePictureInPicture = false,
+    this.disableRemotePlayback = false,
+    this.loop = false,
+    this.muted = false,
+    this.playsInline = false,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: []) {
+    if (autoplay && !muted) {
+      throw Exception("Video cannot be autoplay if it isn't muted!");
+    }
+    if (controlsList != null && !controls) {
+      throw Exception("ControlsList is defined, but controls is disabled!");
+    }
+  }
+
+  @override
+  String build() {
+    return '<video src="$src"'
+        '${autoplay.arg("autoplay")}'
+        '${controls.arg("controls")}'
+        "${controlsList.arg(controls: controls)}"
+        '${disablePictureInPicture.arg("disablepictureinpicture")}'
+        '${disableRemotePlayback.arg("disableremoteplayback")}'
+        '${loop.arg("loop")}'
+        '${muted.arg("muted")}'
+        '${playsInline.arg("playsinline")}'
+        "$imageSize$modifiers></video>";
+  }
+
+  String get imageSize {
+    if (width != null && height != null) {
+      return " width=$width height=$height";
+    }
+    if (width != null) {
+      return " width=$width";
+    }
+    if (height != null) {
+      return " height=$height";
+    }
+    return "";
+  }
+}

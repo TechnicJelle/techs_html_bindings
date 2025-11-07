@@ -22,6 +22,13 @@ extension StringID on String? {
   }
 }
 
+extension BoolArg on bool {
+  String arg(String argName) {
+    if (this) return " $argName";
+    return "";
+  }
+}
+
 extension ElementCollector on Iterable<Element> {
   void collectOfType<E>({required List<E> into}) {
     for (final element in this) {
