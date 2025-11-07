@@ -4,13 +4,36 @@ import "package:techs_html_bindings/elements.dart";
 
 const HtmlEscape _htmlEscape = HtmlEscape();
 
-extension HtmlEscaping on String {
+extension StringCleaning on String {
   String escape() {
     return _htmlEscape.convert(this);
   }
+
+  String clean() {
+    return toLowerCase().replaceAll(RegExp("[^a-z0-9 ]"), "").trim().replaceAll(" ", "-");
+  }
 }
 
-extension Extension1 on Iterable<String>? {
+extension StringID on String? {
+  String id() {
+    final String? id = this;
+    if (id == null) return "";
+    return ' id="$id"';
+  }
+}
+
+extension ElementCollector on Iterable<Element> {
+  void collectOfType<E>({required List<E> into}) {
+    for (final element in this) {
+      if (element case final E e) {
+        into.add(e);
+      }
+      element.children.collectOfType(into: into);
+    }
+  }
+}
+
+extension IterablesToInsertables on Iterable<String>? {
   String classes() {
     final Iterable<String>? classes = this;
     if (classes == null) return "";
@@ -24,32 +47,7 @@ extension Extension1 on Iterable<String>? {
   }
 }
 
-extension Extension2 on String? {
-  String id() {
-    final String? id = this;
-    if (id == null) return "";
-    return ' id="$id"';
-  }
-}
-
-extension Extension3 on String {
-  String clean() {
-    return toLowerCase().replaceAll(RegExp("[^a-z0-9 ]"), "").trim().replaceAll(" ", "-");
-  }
-}
-
-extension Extension4 on Iterable<Element> {
-  void collectOfType<E>({required List<E> into}) {
-    for (final element in this) {
-      if (element case final E e) {
-        into.add(e);
-      }
-      element.children.collectOfType(into: into);
-    }
-  }
-}
-
-extension Extension5 on Map<String, String?>? {
+extension MapToInsertables on Map<String, String?>? {
   String args() {
     final Map<String, String?>? args = this;
     if (args == null) return "";
