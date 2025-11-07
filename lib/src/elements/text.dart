@@ -69,18 +69,18 @@ class Span extends Element {
 }
 
 class Summary extends Element {
-  String summary;
-
-  Summary(
-    this.summary, {
+  Summary({
+    required super.children,
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: []);
+  });
 
   @override
   String build() {
-    return "<summary$modifiers>$summary</summary>";
+    return "<summary$modifiers>"
+        '${children.map((el) => el.build()).join("\n")}'
+        "</summary>";
   }
 }
 
