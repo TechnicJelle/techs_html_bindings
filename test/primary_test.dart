@@ -18,7 +18,7 @@ void main() {
         ),
       );
       final String text = html.build();
-      expect(text.isNotEmpty, isTrue);
+      expect(text, isNotEmpty);
     });
   });
 }

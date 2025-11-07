@@ -12,7 +12,7 @@ void main() {
 
     test("1", () {
       final List<Element> elements = markdown(File("README.md"));
-      expect(elements.isNotEmpty, isTrue);
+      expect(elements, isNotEmpty);
     });
   });
 }

@@ -74,7 +74,7 @@ void main() {
           footer: Footer(children: []),
         ),
       ).build();
-      expect(text.isNotEmpty, isTrue);
+      expect(text, isNotEmpty);
     });
   });
 }
