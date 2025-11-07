@@ -20,6 +20,8 @@ techs_html_bindings:
     ref: main
 ```
 
+You can use `dart pub upgrade` to update the package.
+
 I might upload it on [pub.dev](https://pub.dev/) later, once it's more complete and tested.
 
 ## Usage
