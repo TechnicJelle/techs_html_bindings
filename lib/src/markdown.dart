@@ -1,13 +1,13 @@
-import "dart:io";
+// Stvff doesn't like these...
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names, camel_case_extensions, prefer_final_locals, curly_braces_in_flow_control_structures, avoid_multiple_declarations_per_line
 
 import "package:techs_html_bindings/elements.dart";
 
-/// FINAL THING FUNCTION THAT DOES IT ALL
+/// Parse markdown
 List<Element> markdown(String markdown) {
 	List<int> runes = markdown.runes.toList();
 	List<Element> final_list = [];
-	int final_i = 0;
-	(final_list, final_i) = parse_md(runes, 0, false);
+	(final_list, _) = parse_md(runes, 0, return_on_newline: false);
 	return final_list;
 }
 
@@ -34,11 +34,12 @@ const Newline = 10,
       Underscore = 95,
       Pipe = 124;
 
-(List<Element> elements, int new_i) parse_md(List<int> runes, int i, bool return_on_newline) {
+(List<Element> elements, int new_i) parse_md(List<int> runes, int i_in, {required bool return_on_newline}) {
 	List<Element> elements = [];
+	int i = i_in;
 
 	List<Element> paragraph_content = [];
-	StringBuffer line = StringBuffer('');
+	StringBuffer line = StringBuffer();
 
 	outer_loop: for (; i < runes.length; i += 1) {
 		int rune = runes[i];
@@ -51,7 +52,7 @@ const Newline = 10,
 			if (level > 0 && runes.at(i, Space)) {
 				i += 1;
 				List<Element> header_content = [];
-				(header_content, i) = parse_md(runes, i, true);
+				(header_content, i) = parse_md(runes, i, return_on_newline: true);
 				elements.add(Hn(level: level, children: header_content));
 			} else i -= 1;
 
@@ -60,7 +61,7 @@ const Newline = 10,
 				if (return_on_newline) return (paragraph_content, i);
 			}
 
-			if (runes.at(i+1, Newline) && paragraph_content.length > 0) {
+			if (runes.at(i + 1, Newline) && paragraph_content.isNotEmpty) {
 				elements.add(P(children: paragraph_content));
 				paragraph_content = [];
 			}
@@ -198,17 +199,16 @@ const Newline = 10,
 			));
 			// print("${column_alignments}");
 			/* check for following rows */
-			break;
-		default: add(line, rune); break;
+		default: add(line, rune);
 		}
 	}
 	elements.add(P(children: paragraph_content));
 	return (elements, i);
 }
 
-(String href, Element content, int new_i) parse_link(List<int> runes, int i) {
-	StringBuffer line = StringBuffer('');
-	i += 1;
+(String href, Element content, int new_i) parse_link(List<int> runes, int i_in) {
+	StringBuffer line = StringBuffer();
+	int i = i_in + 1;
 	Element content;
 	if (runes.at(i, Bang)) {
 		i += 1;
@@ -229,12 +229,12 @@ const Newline = 10,
 	return (href, content, i);
 }
 
-extension Literally_Anything on List {
+extension Literally_Anything on List<int> {
 	bool at<V>(int index, V value) {
-		return index < this.length && this[index] == value;
+		return index < length && this[index] == value;
 	}
 	bool nat<V>(int index, V value) {
-		return index < this.length && this[index] != value;
+		return index < length && this[index] != value;
 	}
 }
 

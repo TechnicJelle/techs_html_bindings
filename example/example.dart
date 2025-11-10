@@ -56,7 +56,7 @@ h2:hover > a.link, h3:hover > a.link, h4:hover > a.link {
         ),
         main: Main(
           children: [
-            ...markdown(File("README.md")),
+            ...markdown(File("README.md").readAsStringSync()),
           ],
         ),
         footer: Footer(
