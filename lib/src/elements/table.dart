@@ -22,7 +22,7 @@ class Table extends Element {
 }
 
 class TableHead extends Element {
-  List<TableRowH> rows;
+  Iterable<TableRow> rows;
 
   TableHead({
     required this.rows,
@@ -39,42 +39,8 @@ class TableHead extends Element {
   }
 }
 
-class TableRowH extends Element {
-  Iterable<TableHeader> headers;
-
-  TableRowH({
-    required this.headers,
-    super.id,
-    super.classes,
-    super.inlineStyles,
-  }) : super(children: headers);
-
-  @override
-  String build() {
-    return "<tr$modifiers>\n"
-        '${headers.map((el) => el.build()).join("\n")}\n'
-        "</tr>";
-  }
-}
-
-class TableHeader extends Element {
-  TableHeader({
-    required super.children,
-    super.id,
-    super.classes,
-    super.inlineStyles,
-  });
-
-  @override
-  String build() {
-    return "<th$modifiers>"
-        "${children.map((el) => el.build()).join()}"
-        "</th>";
-  }
-}
-
 class TableBody extends Element {
-  Iterable<TableRowB> rows;
+  Iterable<TableRow> rows;
 
   TableBody({
     required this.rows,
@@ -91,10 +57,10 @@ class TableBody extends Element {
   }
 }
 
-class TableRowB extends Element {
+class TableRow extends Element {
   Iterable<TableCell> cells;
 
-  TableRowB({
+  TableRow({
     required this.cells,
     super.id,
     super.classes,
@@ -109,8 +75,33 @@ class TableRowB extends Element {
   }
 }
 
-class TableCell extends Element {
+abstract class TableCell extends Element {
   TableCell({
+    required super.children,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  });
+}
+
+class TableHeader extends TableCell {
+  TableHeader({
+    required super.children,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  });
+
+  @override
+  String build() {
+    return "<th$modifiers>"
+        "${children.map((el) => el.build()).join()}"
+        "</th>";
+  }
+}
+
+class TableData extends TableCell {
+  TableData({
     required super.children,
     super.id,
     super.classes,
