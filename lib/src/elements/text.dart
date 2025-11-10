@@ -48,7 +48,7 @@ class A extends Element {
   String build() {
     return '<a href="$href"$modifiers>'
         "${children.map((el) => el.build()).join("\n")}"
-        "</a>";
+        "</a>\n";
   }
 }
 
