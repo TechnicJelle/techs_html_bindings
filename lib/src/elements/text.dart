@@ -28,7 +28,7 @@ class P extends Element {
   @override
   String build() {
     return "<p$modifiers>"
-        '${children.map((el) => el.build()).join("\n")}'
+        "${children.map((el) => el.build()).join()}"
         "</p>";
   }
 }
@@ -47,8 +47,8 @@ class A extends Element {
   @override
   String build() {
     return '<a href="$href"$modifiers>'
-        "${children.map((el) => el.build()).join("\n")}"
-        "</a>\n";
+        "${children.map((el) => el.build()).join()}"
+        "</a>";
   }
 }
 
