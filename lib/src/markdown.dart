@@ -54,7 +54,7 @@ const Newline = 10,
           i += 1;
           List<Element> header_content = [];
           (header_content, i) = parse_md(runes, i, return_on_newline: true);
-          elements.add(Hn(level: level, children: header_content));
+          elements.add(Hn.fromLevel(level: level, children: header_content));
         } else
           i -= 1;
 

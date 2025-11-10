@@ -1,7 +1,7 @@
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
 
-class Hn extends Element {
+abstract class Hn extends Element {
   ///Override this if you want the automatic links to have a different class.
   static String autoLinkClass = "link";
 
@@ -24,6 +24,28 @@ class Hn extends Element {
       id = innerText.clean();
     }
   }
+
+  /// Create a Heading with the provided [level].
+  ///
+  /// If [autoLink] is null (or not provided), it will use the default options for each specific heading level:\
+  /// `H1`, `H5`, `H6` *do not* get auto-linked. `H2`, `H3`, `H4` *do* get auto-linked.
+  static Hn fromLevel({
+    required int level,
+    required Iterable<Element> children,
+    String? id,
+    Iterable<String>? classes,
+    Iterable<String>? inlineStyles,
+    bool autoID = true,
+    bool? autoLink,
+  }) => switch (level) {
+    1 => H1(children: children, id: id, classes: classes, inlineStyles: inlineStyles, autoID: autoID, autoLink: autoLink ?? false),
+    2 => H2(children: children, id: id, classes: classes, inlineStyles: inlineStyles, autoID: autoID, autoLink: autoLink ?? true),
+    3 => H3(children: children, id: id, classes: classes, inlineStyles: inlineStyles, autoID: autoID, autoLink: autoLink ?? true),
+    4 => H4(children: children, id: id, classes: classes, inlineStyles: inlineStyles, autoID: autoID, autoLink: autoLink ?? true),
+    5 => H5(children: children, id: id, classes: classes, inlineStyles: inlineStyles, autoID: autoID, autoLink: autoLink ?? false),
+    6 => H6(children: children, id: id, classes: classes, inlineStyles: inlineStyles, autoID: autoID, autoLink: autoLink ?? false),
+    _ => throw Exception("Level $level was outside of the accepted range (1 to 6)"),
+  };
 
   @override
   String build() {
