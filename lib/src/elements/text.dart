@@ -46,8 +46,8 @@ class A extends Element {
 
   @override
   String build() {
-    return '<a href="$href"$modifiers>\n'
-        '${children.map((el) => el.build()).join("\n")}\n'
+    return '<a href="$href"$modifiers>'
+        "${children.map((el) => el.build()).join("\n")}"
         "</a>";
   }
 }
