@@ -131,7 +131,7 @@ class TableData extends TableCell {
   @override
   String build() {
     return "<td$modifiers>"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        "${children.map((el) => el.build()).join()}"
         "</td>";
   }
 }
