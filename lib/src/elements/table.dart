@@ -1,12 +1,14 @@
 import "package:techs_html_bindings/elements.dart";
 
 class Table extends Element {
+  TableCaption? caption;
   TableHead head;
   TableBody body;
 
   Table({
     required this.head,
     required this.body,
+    this.caption,
     super.id,
     super.classes,
     super.inlineStyles,
@@ -14,10 +16,28 @@ class Table extends Element {
 
   @override
   String build() {
+    final thisCaption = caption;
     return "<table$modifiers>\n"
+        "${thisCaption == null ? "" : "${thisCaption.build()}\n"}"
         "${head.build()}\n"
         "${body.build()}\n"
         "</table>";
+  }
+}
+
+class TableCaption extends Element {
+  TableCaption({
+    required super.children,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  });
+
+  @override
+  String build() {
+    return "<caption$modifiers>\n"
+        '${children.map((el) => el.build()).join("\n")}\n'
+        "</caption>";
   }
 }
 

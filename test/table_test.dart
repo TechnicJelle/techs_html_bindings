@@ -10,6 +10,7 @@ void main() {
     test("1", () {
       // Source: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/td
       final table = Table(
+        caption: TableCaption(children: [T("Alien football stars")]),
         head: TableHead(
           rows: [
             TableRow(
@@ -53,6 +54,7 @@ void main() {
 
     test("2", () {
       final table = Table(
+        caption: TableCaption(children: [T("Some letters of the alphabet")]),
         head: TableHead(
           rows: [
             TableRow(
