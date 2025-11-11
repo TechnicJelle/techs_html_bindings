@@ -1,3 +1,4 @@
+// dart format width=131
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
 
@@ -70,17 +71,17 @@ class H1 extends Hn {
 }
 
 class H2 extends Hn {
-  H2({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink})
+  H2({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 2);
 }
 
 class H3 extends Hn {
-  H3({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink})
+  H3({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 3);
 }
 
 class H4 extends Hn {
-  H4({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink})
+  H4({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 4);
 }
 
