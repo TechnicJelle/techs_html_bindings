@@ -231,6 +231,7 @@ const Newline = 10,
     Element alt_text_element;
     (href_to_link, alt_text_element, i) = parse_link(runes, i);
     content = Image(src: href_to_link, alt: (alt_text_element as T).text);
+    i += 1;
   } else {
     for (; runes.nat(i, Bracket_Close); i += 1) add(line, runes[i]);
     content = T(line.toString());
