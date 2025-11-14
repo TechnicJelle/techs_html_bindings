@@ -59,6 +59,10 @@ const Newline = 10,
           i -= 1;
 
         if (level == 0 && line.length > 0) {
+          if (runes.at(i - 1, Space) && runes.at(i - 2, Space)) {
+            line.write("<br/>");
+          }
+          add(line, Space);
           add_as_T(paragraph_content, line);
           if (return_on_newline) return (paragraph_content, i);
         }
@@ -227,6 +231,7 @@ const Newline = 10,
     Element alt_text_element;
     (href_to_link, alt_text_element, i) = parse_link(runes, i);
     content = Image(src: href_to_link, alt: (alt_text_element as T).text);
+    i += 1;
   } else {
     for (; runes.nat(i, Bracket_Close); i += 1) add(line, runes[i]);
     content = T(line.toString());
