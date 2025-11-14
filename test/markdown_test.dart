@@ -12,7 +12,6 @@ void main() {
 
     test("1", () {
       final List<Element> elements = markdown(File("README.md").readAsStringSync());
-      print(Div(children: elements).build());
       expect(elements, isNotEmpty);
     });
   });
