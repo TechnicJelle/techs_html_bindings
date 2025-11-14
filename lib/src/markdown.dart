@@ -80,8 +80,8 @@ const Newline = 10,
         add_as_T(elements, line);
       case Bang:
         /* check for picture */
-        i += 1;
-        if (runes.at(i, Bracket_Open)) {
+        if (runes.at(i + 1, Bracket_Open)) {
+          i += 1;
           add_as_T(paragraph_content, line);
           String href;
           Element content;
