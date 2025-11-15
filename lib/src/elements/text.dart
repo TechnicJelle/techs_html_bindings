@@ -7,7 +7,9 @@ class T extends Element {
 
   T.single(Iterable<Element> elements) : text = elements.map((el) => el.build()).join(), super(children: []);
 
-  T.multiline(Iterable<Element> lines) : text = lines.map((el) => el.build()).join("<br>\n"), super(children: []);
+  T.multiline(Iterable<Element> lines)
+    : text = lines.map((el) => el.build()).join("<br/>\n"),
+      super(children: []);
 
   @override
   String build() {
