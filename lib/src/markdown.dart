@@ -62,7 +62,6 @@ const Newline = 10,
           if (runes.at(i - 1, Space) && runes.at(i - 2, Space)) {
             line.write("<br/>");
           }
-          add(line, Space);
           add_as_T(paragraph_content, line);
           if (return_on_newline) return (paragraph_content, i);
         }
@@ -70,6 +69,8 @@ const Newline = 10,
         if (runes.at(i + 1, Newline) && paragraph_content.isNotEmpty) {
           elements.add(P(children: paragraph_content));
           paragraph_content = [];
+        } else if (paragraph_content.isNotEmpty) {
+          paragraph_content.add(T("\n"));
         }
 
       case HTML_Open:

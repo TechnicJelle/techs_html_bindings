@@ -27,9 +27,9 @@ class P extends Element {
 
   @override
   String build() {
-    return "<p$modifiers>"
-        "${children.map((el) => el.build()).join()}"
-        "</p>";
+    return "<p$modifiers>\n"
+        "${children.map((el) => el.build()).join()}\n"
+        "</p>\n";
   }
 }
 
