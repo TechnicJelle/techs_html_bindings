@@ -40,6 +40,23 @@ extension ElementCollector on Iterable<Element> {
   }
 }
 
+extension ElementReplacer on List<Element> {
+  /// [test] gives you an element to interrogate.
+  /// You must return a list of elements if you want to replace that element with that list.
+  /// Return null to not replace that element.
+  void replace({required List<Element>? Function(Element) test}) {
+    for (int i = length - 1; i >= 0; i--) {
+      final element = this[i];
+      final List<Element>? toReplace = test(element);
+      if (toReplace != null) {
+        removeAt(i);
+        insertAll(i, toReplace);
+      }
+      (element.children as List<Element>).replace(test: test);
+    }
+  }
+}
+
 extension IterablesToInsertables on Iterable<String>? {
   String classes() {
     final Iterable<String>? classes = this;
