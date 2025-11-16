@@ -79,6 +79,7 @@ class Video extends Element {
   bool loop;
   bool muted;
   bool playsInline;
+  bool tabFocusable;
 
   Video({
     required this.src,
@@ -92,6 +93,7 @@ class Video extends Element {
     this.loop = false,
     this.muted = false,
     this.playsInline = false,
+    this.tabFocusable = true,
     super.id,
     super.classes,
     super.inlineStyles,
@@ -115,6 +117,7 @@ class Video extends Element {
         '${loop.arg("loop")}'
         '${muted.arg("muted")}'
         '${playsInline.arg("playsinline")}'
+        '${tabFocusable ? 'tabindex="-1"' : ""}'
         "$imageSize$modifiers></video>";
   }
 
