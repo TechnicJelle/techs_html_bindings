@@ -117,7 +117,7 @@ class Video extends Element {
         '${loop.arg("loop")}'
         '${muted.arg("muted")}'
         '${playsInline.arg("playsinline")}'
-        '${tabFocusable ? 'tabindex="-1"' : ""}'
+        '${tabFocusable ? "" : ' tabindex="-1"'}'
         "$imageSize$modifiers></video>";
   }
 

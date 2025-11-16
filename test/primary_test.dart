@@ -38,6 +38,7 @@ void main() {
         disableRemotePlayback: true,
         loop: true,
         playsInline: true,
+        tabFocusable: false,
         width: 640,
         height: 360,
       ).build();
