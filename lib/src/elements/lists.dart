@@ -34,11 +34,33 @@ class UnorderedList extends Element {
   }
 }
 
+enum OrderedListType {
+  lowercaseLetters,
+  uppercaseLetters,
+  lowercaseRomanNumerals,
+  uppercaseRomanNumerals,
+  numbers
+  ;
+
+  @override
+  String toString() {
+    return switch (this) {
+      OrderedListType.lowercaseLetters => "a",
+      OrderedListType.uppercaseLetters => "A",
+      OrderedListType.lowercaseRomanNumerals => "i",
+      OrderedListType.uppercaseRomanNumerals => "I",
+      OrderedListType.numbers => "1",
+    };
+  }
+}
+
 class OrderedList extends Element {
   Iterable<ListItem> items;
+  OrderedListType? type;
 
   OrderedList({
     required this.items,
+    this.type,
     super.id,
     super.classes,
     super.inlineStyles,
@@ -46,6 +68,10 @@ class OrderedList extends Element {
 
   @override
   String build() {
+    String modifiers = this.modifiers;
+    if (type != null) {
+      modifiers += " type=$type";
+    }
     return "<ol$modifiers>\n"
         '${children.map((el) => el.build()).join("\n")}\n'
         "</ol>";
