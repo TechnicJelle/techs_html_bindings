@@ -44,5 +44,17 @@ void main() {
       ).build();
       expect(text, isNotEmpty);
     });
+
+    test("Ordered List Types", () {
+      final ol = OrderedList(
+        type: .lowercaseLetters,
+        items: [
+          ListItem(children: [T("one")]),
+          ListItem(children: [T("two")]),
+          ListItem(children: [T("three")]),
+        ],
+      ).build();
+      expect(ol, isNotEmpty);
+    });
   });
 }
