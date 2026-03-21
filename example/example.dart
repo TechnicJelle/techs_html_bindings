@@ -75,7 +75,7 @@ h2:hover > a.link, h3:hover > a.link, h4:hover > a.link {
           children: [
             P(
               children: [
-                T("Website last updated on"),
+                T("Website last updated on "),
                 Time(
                   inlineStyles: ["color: red"],
                   datetime: DateTime.now().toIso8601String(),
