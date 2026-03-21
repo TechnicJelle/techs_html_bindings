@@ -69,9 +69,8 @@ class OrderedList extends Element {
   @override
   String build() {
     String modifiers = this.modifiers;
-    if (type != null) {
-      modifiers += " type=$type";
-    }
+    if (type != null) modifiers += " type=$type";
+
     return "<ol$modifiers>\n"
         '${children.map((el) => el.build()).join("\n")}\n'
         "</ol>";
