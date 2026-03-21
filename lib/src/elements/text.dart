@@ -17,6 +17,15 @@ class T extends Element {
   }
 }
 
+class Br extends Element {
+  Br() : super(children: const Iterable.empty());
+
+  @override
+  String build() {
+    return "<br>";
+  }
+}
+
 class P extends Element {
   P({
     required super.children,
