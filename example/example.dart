@@ -26,6 +26,13 @@ header nav ul {
 	font-style: italic;
 }
 
+pre, :not(pre) > code {
+	background-color: light-dark(lightgray, dimgrey);
+	border-radius: 4px;
+}
+pre { padding: 1em 1.25em; }
+:not(pre) > code { padding: 0.2em 0.4em; }
+
 /* Anchor point for the headings' autoLink feature */
 h2, h3, h4 {
 	position: relative;
