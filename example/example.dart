@@ -12,6 +12,10 @@ void main() {
         styles: [
           Style(
             css: """
+:root {
+	color-scheme: dark light;
+}
+
 header nav ul {
 	display: flex;
 	list-style-type: none;
