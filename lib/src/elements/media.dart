@@ -134,3 +134,72 @@ class Video extends Element {
     return "";
   }
 }
+
+class Source extends Element {
+  String srcset;
+  String? media;
+  String? type;
+
+  Source({
+    required this.srcset,
+    this.media,
+    this.type,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: const Iterable.empty());
+
+  @override
+  String build() {
+    String modifiers = this.modifiers;
+    if (media != null) modifiers += ' media="$media"';
+    if (type != null) modifiers += ' type="$type"';
+
+    return '<source srcset="$srcset"$modifiers/>';
+  }
+}
+
+class Picture extends Element {
+  List<Source> sources;
+  Image image;
+
+  Picture({
+    required this.sources,
+    required this.image,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: const Iterable.empty());
+
+  /// default is light
+  Picture.lightDark({
+    required String lightSrc,
+    required String darkSrc,
+    required String alt,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : sources = [Source(srcset: darkSrc, media: "(prefers-color-scheme: dark)")],
+       image = Image(src: lightSrc, alt: alt),
+       super(children: const Iterable.empty());
+
+  /// default is dark
+  Picture.darkLight({
+    required String lightSrc,
+    required String darkSrc,
+    required String alt,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : sources = [Source(srcset: lightSrc, media: "(prefers-color-scheme: light)")],
+       image = Image(src: darkSrc, alt: alt),
+       super(children: const Iterable.empty());
+
+  @override
+  String build() {
+    return "<picture$modifiers>\n"
+        '\t${sources.map((s) => s.build()).join("\n\t")}\n'
+        "\t${image.build()}\n"
+        "</picture>";
+  }
+}

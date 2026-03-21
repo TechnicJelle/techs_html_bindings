@@ -57,4 +57,43 @@ void main() {
       expect(ol, isNotEmpty);
     });
   });
+
+  test("Picture Element", () {
+    final lightDarkManual = Picture(
+      sources: [
+        Source(
+          media: "(prefers-color-scheme: dark)",
+          srcset: "assets/dark/promo.png",
+        ),
+      ],
+      image: Image(
+        src: "assets/light/promo.png",
+        alt: "Promotional image",
+      ),
+    ).build();
+
+    final lightDarkAuto = Picture.lightDark(
+      lightSrc: "assets/light/promo.png",
+      darkSrc: "assets/dark/promo.png",
+      alt: "Promotional image",
+    ).build();
+
+    expect(lightDarkManual, lightDarkAuto);
+
+    final darkLightAuto = Picture.darkLight(
+      lightSrc: "assets/light/promo.png",
+      darkSrc: "assets/dark/promo.png",
+      alt: "Promotional image",
+    ).build();
+    expect(darkLightAuto, isNotEmpty);
+
+    final pictureTyped = Picture(
+      sources: [
+        Source(srcset: "photo.avif", type: "image/avif"),
+        Source(srcset: "photo.webp", type: "image/webp"),
+      ],
+      image: Image(src: "photo.jpg", alt: "photo"),
+    ).build();
+    expect(pictureTyped, isNotEmpty);
+  });
 }
