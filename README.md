@@ -29,7 +29,6 @@ I might upload it on [pub.dev](https://pub.dev/) later, once it's more complete 
 Short example:
 
 ```dart
-
 final String html = HTML(
   lang: "en",
   head: Head(title: "Hello bindings!"),
@@ -37,7 +36,7 @@ final String html = HTML(
     header: Header(children: []),
     main: Main(
       children: [
-        ...markdown(File("README.md")),
+        ...markdown(File("README.md").readAsStringSync()),
       ],
     ),
     footer: Footer(children: []),
