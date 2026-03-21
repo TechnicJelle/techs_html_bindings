@@ -10,5 +10,6 @@ export "src/elements/headings.dart";
 export "src/elements/layout.dart";
 export "src/elements/lists.dart";
 export "src/elements/media.dart";
+export "src/elements/quotes.dart";
 export "src/elements/table.dart";
 export "src/elements/text.dart";
