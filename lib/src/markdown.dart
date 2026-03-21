@@ -35,6 +35,9 @@ html.Element mdElementToHtmlElement(md.Element element) {
     "strong" => html.Strong(children: children),
     "img" => html.Image(src: attr["src"]!, alt: attr["alt"]!),
     "blockquote" => html.BlockQuote(children: children, cite: attr["cite"]),
+    "ul" => html.UnorderedList(items: children.map((e) => e as html.ListItem)),
+    "ol" => html.OrderedList(items: children.map((e) => e as html.ListItem)),
+    "li" => html.ListItem(children: children),
     _ => throw UnsupportedError("Element tag '$tag' not supported!"),
   };
 }
