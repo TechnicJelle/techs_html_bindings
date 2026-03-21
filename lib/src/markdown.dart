@@ -34,6 +34,7 @@ html.Element mdElementToHtmlElement(md.Element element) {
     "em" => html.Em(children: children),
     "strong" => html.Strong(children: children),
     "img" => html.Image(src: attr["src"]!, alt: attr["alt"]!),
+    "blockquote" => html.BlockQuote(children: children, cite: attr["cite"]),
     _ => throw UnsupportedError("Element tag '$tag' not supported!"),
   };
 }
