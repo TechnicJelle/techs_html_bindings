@@ -44,19 +44,33 @@ class P extends Element {
   }
 }
 
+enum Target { self, blank, parent, top, unfencedTop }
+
 class A extends Element {
   String href;
+  Target? target;
 
   A({
     required this.href,
     required super.children,
+    this.target,
     super.id,
     super.classes,
     super.inlineStyles,
   });
 
+  A.newTab({
+    required this.href,
+    required super.children,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : target = .blank;
+
   @override
   String build() {
+    String modifiers = this.modifiers;
+    if (target != null) modifiers += ' target="_${target!.name}"';
     return '<a href="$href"$modifiers>'
         "${children.map((el) => el.build()).join()}"
         "</a>";
