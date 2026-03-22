@@ -1,6 +1,7 @@
 import "dart:io";
 
 import "package:image/image.dart" as img;
+import "package:path/path.dart" as p;
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
 
@@ -10,6 +11,8 @@ class Image extends Element {
   int? width;
   int? height;
 
+  /// Set the `TECHS_IMAGE_ROOT` environment variable in your build script
+  /// to control from where the autoSize mechanism will look.
   bool autoSize;
 
   Image({
@@ -39,7 +42,8 @@ class Image extends Element {
       return " height=$height";
     }
     if (autoSize) {
-      final file = File(src);
+      final String? imageRoot = Platform.environment["TECHS_IMAGE_ROOT"];
+      final file = imageRoot == null ? File(src) : File(p.join(imageRoot, src));
       if (file.existsSync()) {
         final img.Image? imageData = img.decodeImage(file.readAsBytesSync());
         if (imageData == null) return "";
