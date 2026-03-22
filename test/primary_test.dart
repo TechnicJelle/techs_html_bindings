@@ -96,4 +96,10 @@ void main() {
     ).build();
     expect(pictureTyped, isNotEmpty);
   });
+
+  test("A new tab", () {
+    final aManual = A(href: "#", children: [], target: .blank).build();
+    final aAuto = A.newTab(href: "#", children: []).build();
+    expect(aManual, aAuto);
+  });
 }
