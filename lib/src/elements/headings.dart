@@ -77,7 +77,7 @@ class H2 extends Hn {
   H2({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 2);
 
-  H2.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+  H2.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 2, children: [T(text)]);
 }
 
@@ -85,7 +85,7 @@ class H3 extends Hn {
   H3({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 3);
 
-  H3.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+  H3.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 3, children: [T(text)]);
 }
 
@@ -93,7 +93,7 @@ class H4 extends Hn {
   H4({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 4);
 
-  H4.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+  H4.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 4, children: [T(text)]);
 }
 
