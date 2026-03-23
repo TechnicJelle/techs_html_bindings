@@ -34,7 +34,12 @@ class P extends Element {
     super.inlineStyles,
   });
 
-  P.text(String text) : super(children: [T(text)]);
+  P.text(
+    String text, {
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: [T(text)]);
 
   @override
   String build() {

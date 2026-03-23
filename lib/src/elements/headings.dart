@@ -68,29 +68,47 @@ abstract class Hn extends Element {
 class H1 extends Hn {
   H1({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
     : super(level: 1);
+
+  H1.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+    : super(level: 1, children: [T(text)]);
 }
 
 class H2 extends Hn {
   H2({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 2);
+
+  H2.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+    : super(level: 2, children: [T(text)]);
 }
 
 class H3 extends Hn {
   H3({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 3);
+
+  H3.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+    : super(level: 3, children: [T(text)]);
 }
 
 class H4 extends Hn {
   H4({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = true})
     : super(level: 4);
+
+  H4.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+    : super(level: 4, children: [T(text)]);
 }
 
 class H5 extends Hn {
   H5({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
     : super(level: 5);
+
+  H5.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+    : super(level: 5, children: [T(text)]);
 }
 
 class H6 extends Hn {
   H6({required super.children, super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
     : super(level: 6);
+
+  H6.text(String text, {super.id, super.classes, super.inlineStyles, super.autoID, super.autoLink = false})
+    : super(level: 6, children: [T(text)]);
 }
