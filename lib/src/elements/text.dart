@@ -64,6 +64,15 @@ class A extends Element {
     super.inlineStyles,
   });
 
+  A.text(
+    String text, {
+    required this.href,
+    this.target,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: [T(text)]);
+
   A.newTab({
     required this.href,
     required super.children,
@@ -71,6 +80,15 @@ class A extends Element {
     super.classes,
     super.inlineStyles,
   }) : target = .blank;
+
+  A.newTabText(
+    String text, {
+    required this.href,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : target = .blank,
+       super(children: [T(text)]);
 
   @override
   String build() {
@@ -90,6 +108,13 @@ class Span extends Element {
     super.inlineStyles,
   });
 
+  Span.text(
+    String text, {
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: [T(text)]);
+
   @override
   String build() {
     return "<span$modifiers>"
@@ -105,6 +130,13 @@ class Summary extends Element {
     super.classes,
     super.inlineStyles,
   });
+
+  Summary.text(
+    String text, {
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: [T(text)]);
 
   @override
   String build() {
@@ -137,6 +169,8 @@ class Details extends Element {
 class Em extends Element {
   Em({required super.children});
 
+  Em.text(String text) : super(children: [T(text)]);
+
   @override
   String build() {
     return "<em>"
@@ -147,6 +181,8 @@ class Em extends Element {
 
 class Strong extends Element {
   Strong({required super.children});
+
+  Strong.text(String text) : super(children: [T(text)]);
 
   @override
   String build() {
