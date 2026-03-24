@@ -23,6 +23,7 @@ class Head extends Element {
         .join("\n\n");
     return "<head>\n"
         '<meta charset="UTF-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         "<title>$title</title>\n\n"
         "$concatenated\n"
         "</head>";
