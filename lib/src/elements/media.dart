@@ -95,6 +95,7 @@ class Video extends Element {
   bool muted;
   bool playsInline;
   bool tabFocusable;
+  Loading? loading;
 
   Video({
     required this.src,
@@ -109,6 +110,7 @@ class Video extends Element {
     this.muted = false,
     this.playsInline = false,
     this.tabFocusable = true,
+    this.loading,
     super.id,
     super.classes,
     super.inlineStyles,
@@ -123,6 +125,8 @@ class Video extends Element {
 
   @override
   String build() {
+    String modifiers = this.modifiers;
+    if (loading != null) modifiers += ' loading="${loading!.name}"';
     return '<video src="$src"'
         '${autoplay.arg("autoplay")}'
         '${controls.arg("controls")}'
