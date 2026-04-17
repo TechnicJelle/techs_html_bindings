@@ -5,14 +5,21 @@ import "package:path/path.dart" as p;
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
 
+enum Loading { eager, lazy }
+
 class Image extends Element {
   String src;
   String alt;
   int? width;
   int? height;
+  Loading? loading;
 
-  /// Set the `TECHS_IMAGE_ROOT` environment variable in your build script
-  /// to control from where the autoSize mechanism will look.
+  /// Tells the [autoSize] mechanism where to look for the image file to measure.
+  String? imageRoot;
+
+  /// Use the [imageRoot] parameter,
+  /// or set the `TECHS_IMAGE_ROOT` environment variable in your build script,
+  /// to control from where the [autoSize] mechanism will look.
   bool autoSize;
 
   Image({
@@ -23,11 +30,15 @@ class Image extends Element {
     super.inlineStyles,
     this.width,
     this.height,
+    this.loading,
+    this.imageRoot,
     this.autoSize = true,
   }) : super(children: []);
 
   @override
   String build() {
+    String modifiers = this.modifiers;
+    if (loading != null) modifiers += ' loading="${loading!.name}"';
     return '<img src="$src" alt="${alt.escape()}"$imageSize$modifiers>';
   }
 
@@ -42,7 +53,7 @@ class Image extends Element {
       return " height=$height";
     }
     if (autoSize) {
-      final String? imageRoot = Platform.environment["TECHS_IMAGE_ROOT"];
+      final String? imageRoot = this.imageRoot ?? Platform.environment["TECHS_IMAGE_ROOT"];
       final file = imageRoot == null ? File(src) : File(p.join(imageRoot, src));
       if (file.existsSync()) {
         final img.Image? imageData = img.decodeImage(file.readAsBytesSync());
