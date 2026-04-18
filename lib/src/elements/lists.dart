@@ -11,6 +11,14 @@ class ListItem extends Element {
     super.inlineStyles,
   });
 
+  ListItem.text(
+    String text, {
+    this.value,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: [T(text)]);
+
   @override
   String build() {
     String modifiers = this.modifiers;
