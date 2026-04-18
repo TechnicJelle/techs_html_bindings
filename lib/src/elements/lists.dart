@@ -1,15 +1,29 @@
 import "package:techs_html_bindings/elements.dart";
 
 class ListItem extends Element {
+  String? value;
+
   ListItem({
     required super.children,
+    this.value,
     super.id,
     super.classes,
     super.inlineStyles,
   });
 
+  ListItem.text(
+    String text, {
+    this.value,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: [T(text)]);
+
   @override
   String build() {
+    String modifiers = this.modifiers;
+    if (value != null) modifiers += ' value="$value"';
+
     return "<li$modifiers>"
         '${children.map((el) => el.build()).join("\n")}'
         "</li>";
