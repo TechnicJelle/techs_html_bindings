@@ -52,7 +52,7 @@ extension ElementReplacer on List<Element> {
         removeAt(i);
         insertAll(i, toReplace);
       }
-      (element.children as List<Element>).replace(test: test);
+      if (element.children.isNotEmpty) (element.children as List<Element>).replace(test: test);
     }
   }
 }
