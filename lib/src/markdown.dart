@@ -3,7 +3,7 @@ import "package:techs_html_bindings/elements.dart" as html;
 
 /// Parse markdown
 List<html.Element> markdown(String markdown) {
-  final md.Document document = md.Document(encodeHtml: false);
+  final md.Document document = md.Document(encodeHtml: false, extensionSet: md.ExtensionSet.gitHubFlavored);
   final List<md.Node> nodes = document.parse(markdown);
   final List<html.Element> elements = nodes.map(mdNodeToHtmlElement).toList();
   return elements;
@@ -19,6 +19,7 @@ html.Element mdElementToHtmlElement(md.Element element) {
   final String tag = element.tag;
   final List<html.Element> children = element.children?.map(mdNodeToHtmlElement).toList() ?? [];
   final Map<String, String> attr = element.attributes;
+  final List<String>? align = attr["align"] != null ? ["text-align: ${attr["align"]}"] : null;
   return switch (tag) {
     "h1" => html.H1(children: children),
     "h2" => html.H2(children: children),
@@ -38,6 +39,15 @@ html.Element mdElementToHtmlElement(md.Element element) {
     "ul" => html.UnorderedList(items: children.map((e) => e as html.ListItem)),
     "ol" => html.OrderedList(items: children.map((e) => e as html.ListItem)),
     "li" => html.ListItem(children: children),
+    "th" => html.TableHeader(children: children, inlineStyles: align),
+    "tr" => html.TableRow(cells: children.map((e) => e as html.TableCell)),
+    "thead" => html.TableHead(rows: children.map((e) => e as html.TableRow)),
+    "td" => html.TableData(children: children, inlineStyles: align),
+    "tbody" => html.TableBody(rows: children.map((e) => e as html.TableRow)),
+    "table" => html.Table(
+      head: children.whereType<html.TableHead>().first,
+      body: children.whereType<html.TableBody>().first,
+    ),
     _ => throw UnsupportedError("Element tag '$tag' not supported!"),
   };
 }
