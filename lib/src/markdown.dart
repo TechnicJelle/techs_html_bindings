@@ -45,8 +45,8 @@ html.Element mdElementToHtmlElement(md.Element element) {
     "td" => html.TableData(children: children, inlineStyles: align),
     "tbody" => html.TableBody(rows: children.map((e) => e as html.TableRow)),
     "table" => html.Table(
-      head: children.whereType<html.TableHead>().first,
-      body: children.whereType<html.TableBody>().first,
+      head: children.whereType<html.TableHead>().firstOrNull ?? html.TableHead(rows: []),
+      body: children.whereType<html.TableBody>().firstOrNull ?? html.TableBody(rows: []),
     ),
     _ => throw UnsupportedError("Element tag '$tag' not supported!"),
   };
