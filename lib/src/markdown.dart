@@ -31,6 +31,7 @@ html.Element mdElementToHtmlElement(md.Element element) {
     "pre" => html.Pre(children: children),
     "code" => html.Code(children: children, classes: attr["class"]?.split(" ")),
     "br" => html.Br(),
+    "hr" => html.Hr(),
     "a" => html.A(href: attr["href"]!, children: children),
     "em" => html.Em(children: children),
     "strong" => html.Strong(children: children),
