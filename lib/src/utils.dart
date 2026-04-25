@@ -88,7 +88,7 @@ extension MapToInsertables on Map<String, String?>? {
     final StringBuffer sb = StringBuffer();
     args.forEach((String key, String? value) {
       if (value != null) {
-        sb.write(" $key=$value");
+        sb.write(' $key="$value"');
       }
     });
     return sb.toString();
