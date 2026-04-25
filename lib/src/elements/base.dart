@@ -6,15 +6,17 @@ abstract class Element {
   String? id;
   Iterable<String>? classes;
   Iterable<String>? inlineStyles;
+  Map<String, String?>? args;
 
   Element({
     required this.children,
     this.id,
     this.classes,
     this.inlineStyles,
+    this.args,
   });
 
-  String get modifiers => "${id.id()}${classes.classes()}${inlineStyles.styles()}";
+  String get modifiers => "${id.id()}${classes.classes()}${inlineStyles.styles()}${args.args()}";
 
   String build();
 

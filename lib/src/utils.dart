@@ -75,6 +75,16 @@ extension MapToInsertables on Map<String, String?>? {
   String args() {
     final Map<String, String?>? args = this;
     if (args == null) return "";
+    if (args.containsKey("id")) {
+      throw ArgumentError("May not contain `id`! Use the `id` parameter for this", "args");
+    }
+    if (args.containsKey("class")) {
+      throw ArgumentError("May not contain `class`! Use the `classes` parameter for this", "args");
+    }
+    if (args.containsKey("style")) {
+      throw ArgumentError("May not contain `style`! Use the `inlineStyles` parameter for this", "args");
+    }
+
     final StringBuffer sb = StringBuffer();
     args.forEach((String key, String? value) {
       if (value != null) {

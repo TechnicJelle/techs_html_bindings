@@ -6,6 +6,7 @@ class Div extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
+    super.args,
   });
 
   @override

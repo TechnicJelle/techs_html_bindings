@@ -71,18 +71,19 @@ enum PreloadType {
 class Link extends Element {
   String rel;
   String href;
-  Map<String, String?>? args;
 
   Link.icon({
     required String? type,
     required String? sizes,
     required this.href,
   }) : rel = "icon",
-       args = {
-         "type": type,
-         "sizes": sizes,
-       },
-       super(children: []);
+       super(
+         children: [],
+         args: {
+           "type": type,
+           "sizes": sizes,
+         },
+       );
 
   Link.stylesheet({
     required this.href,
@@ -93,10 +94,12 @@ class Link extends Element {
     required this.href,
     required PreloadType as,
   }) : rel = "preload",
-       args = {
-         "as": as.name,
-       },
-       super(children: []);
+       super(
+         children: [],
+         args: {
+           "as": as.name,
+         },
+       );
 
   static Iterable<Link> preloadedStylesheet({required String href}) {
     return [
