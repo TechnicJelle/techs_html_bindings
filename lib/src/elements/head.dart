@@ -78,11 +78,11 @@ class Link extends Element {
     required this.href,
   }) : rel = "icon",
        super(
-         children: [],
          args: {
            "type": type,
            "sizes": sizes,
          },
+         children: [],
        );
 
   Link.stylesheet({
@@ -95,18 +95,30 @@ class Link extends Element {
     required PreloadType as,
   }) : rel = "preload",
        super(
-         children: [],
          args: {
            "as": as.name,
          },
+         children: [],
        );
 
-  static Iterable<Link> preloadedStylesheet({required String href}) {
+  static List<Link> preloadedStylesheet({required String href}) {
     return [
       Link.preload(href: href, as: PreloadType.style),
       Link.stylesheet(href: href),
     ];
   }
+
+  Link.atom({
+    required this.href,
+    required String title,
+  }) : rel = "alternate",
+       super(
+         args: {
+           "type": "application/atom+xml",
+           "title": title,
+         },
+         children: [],
+       );
 
   @override
   String build() {

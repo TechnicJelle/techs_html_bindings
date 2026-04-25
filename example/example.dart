@@ -76,10 +76,8 @@ h2:hover > a.link, h3:hover > a.link, h4:hover > a.link {
             P(
               children: [
                 T("Website last updated on "),
-                Time(
+                Time.now(
                   inlineStyles: ["color: red"],
-                  datetime: DateTime.now().toIso8601String(),
-                  visible: DateTime.now().copyWith(microsecond: 0).toIso8601String().replaceAll("T", " "),
                 ),
               ],
             ),

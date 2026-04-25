@@ -27,6 +27,21 @@ class Time extends Element {
     super.inlineStyles,
   }) : super(children: [T(visible)]);
 
+  factory Time.now({
+    String? id,
+    Iterable<String>? classes,
+    Iterable<String>? inlineStyles,
+  }) {
+    final now = DateTime.now();
+    return Time(
+      datetime: now.toIso8601String(),
+      visible: now.copyWith(microsecond: 0).toIso8601String().replaceAll("T", " "),
+      id: id,
+      classes: classes,
+      inlineStyles: inlineStyles,
+    );
+  }
+
   @override
   String build() {
     return '<time datetime="$datetime"$modifiers>'
