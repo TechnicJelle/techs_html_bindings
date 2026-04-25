@@ -78,11 +78,11 @@ class Link extends Element {
     required this.href,
   }) : rel = "icon",
        super(
-         children: [],
          args: {
            "type": type,
            "sizes": sizes,
          },
+         children: [],
        );
 
   Link.stylesheet({
@@ -95,10 +95,10 @@ class Link extends Element {
     required PreloadType as,
   }) : rel = "preload",
        super(
-         children: [],
          args: {
            "as": as.name,
          },
+         children: [],
        );
 
   static Iterable<Link> preloadedStylesheet({required String href}) {
