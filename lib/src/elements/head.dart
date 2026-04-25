@@ -101,7 +101,7 @@ class Link extends Element {
          children: [],
        );
 
-  static Iterable<Link> preloadedStylesheet({required String href}) {
+  static List<Link> preloadedStylesheet({required String href}) {
     return [
       Link.preload(href: href, as: PreloadType.style),
       Link.stylesheet(href: href),
