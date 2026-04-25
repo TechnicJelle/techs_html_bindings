@@ -108,6 +108,18 @@ class Link extends Element {
     ];
   }
 
+  Link.atom({
+    required this.href,
+    required String title,
+  }) : rel = "alternate",
+       super(
+         args: {
+           "type": "application/atom+xml",
+           "title": title,
+         },
+         children: [],
+       );
+
   @override
   String build() {
     return '<link rel="$rel" href="$href"${args.args()}>';
