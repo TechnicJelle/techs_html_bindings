@@ -8,7 +8,7 @@ class T extends Element {
   T.single(Iterable<Element> elements) : text = elements.map((el) => el.build()).join(), super(children: []);
 
   T.multiline(Iterable<Element> lines)
-    : text = lines.map((el) => el.build()).join("<br/>\n"),
+    : text = lines.map((el) => el.build()).join("<br />\n"),
       super(children: []);
 
   @override
@@ -22,7 +22,7 @@ class Br extends Element {
 
   @override
   String build() {
-    return "<br>";
+    return "<br />";
   }
 }
 

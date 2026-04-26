@@ -5,6 +5,6 @@ class Hr extends Element {
 
   @override
   String build() {
-    return "<hr>";
+    return "<hr />";
   }
 }
