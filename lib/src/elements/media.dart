@@ -39,7 +39,7 @@ class Image extends Element {
   String build() {
     String modifiers = this.modifiers;
     if (loading != null) modifiers += ' loading="${loading!.name}"';
-    return '<img src="$src" alt="${alt.escape()}"$imageSize$modifiers>';
+    return '<img src="$src" alt="${alt.escape()}"$imageSize$modifiers />';
   }
 
   String get imageSize {
@@ -174,7 +174,7 @@ class Source extends Element {
     if (media != null) modifiers += ' media="$media"';
     if (type != null) modifiers += ' type="$type"';
 
-    return '<source srcset="$srcset"$modifiers/>';
+    return '<source srcset="$srcset"$modifiers />';
   }
 }
 

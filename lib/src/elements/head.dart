@@ -22,8 +22,8 @@ class Head extends Element {
         .map((Iterable<Element> els) => els.map((Element el) => el.build()).join("\n"))
         .join("\n\n");
     return "<head>\n"
-        '<meta charset="UTF-8">\n'
-        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        '<meta charset="UTF-8" />\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
         "<title>$title</title>\n\n"
         "$concatenated\n"
         "</head>";
@@ -60,9 +60,9 @@ class Meta extends Element {
   @override
   String build() {
     if (content != null) {
-      return '<meta $key="$value" content="$content">';
+      return '<meta $key="$value" content="$content" />';
     }
-    return '<meta $key="$value">';
+    return '<meta $key="$value" />';
   }
 }
 
@@ -129,7 +129,7 @@ class Link extends Element {
 
   @override
   String build() {
-    return '<link rel="$rel" href="$href"${args.args()}>';
+    return '<link rel="$rel" href="$href"${args.args()} />';
   }
 }
 
