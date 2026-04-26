@@ -2,6 +2,7 @@ import "dart:io";
 
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/markdown.dart";
+import "package:techs_html_bindings/src/utils.dart";
 import "package:test/test.dart";
 
 void main() {
@@ -31,5 +32,26 @@ This concludes the Table Test.
       expect(elements, isNotEmpty);
       expect(elements.whereType<Table>().firstOrNull, isNotNull);
     });
+  });
+
+  test("Inline HTML Video", () {
+    const String strMarkdown = """
+# Inline HTML Video Test
+
+<video src="dQw4w9WgXcQ.mp4" autoplay muted loop></video>
+
+This concludes the Inline HTML Video Test.
+""";
+    final List<Element> elements = markdown(strMarkdown);
+    expect(elements, isNotEmpty);
+    final List<Video> videos = [];
+    elements.collectOfType(into: videos);
+    expect(videos, isNotEmpty);
+    final Video video = videos.first;
+
+    expect(video.src, "dQw4w9WgXcQ.mp4");
+    expect(video.autoplay, isTrue);
+    expect(video.muted, isTrue);
+    expect(video.loop, isTrue);
   });
 }

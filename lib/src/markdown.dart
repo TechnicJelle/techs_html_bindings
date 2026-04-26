@@ -1,3 +1,5 @@
+import "package:html/dom.dart" as html2;
+import "package:html/parser.dart" as html2;
 import "package:markdown/markdown.dart" as md;
 import "package:techs_html_bindings/elements.dart" as html;
 
@@ -11,9 +13,40 @@ List<html.Element> markdown(String markdown) {
 
 html.Element mdNodeToHtmlElement(md.Node node) => switch (node) {
   md.Element() => mdElementToHtmlElement(node),
+  md.Text(:final text) when text.startsWith(RegExp(r"\s*<.+>")) => inlineHtmlToHtmlElement(text),
   md.Text() => html.T(node.text),
   _ => throw UnsupportedError("Node type '$node' not supported!"),
 };
+
+html.Element inlineHtmlToHtmlElement(String text) {
+  final fragment = html2.parseFragment(text);
+  final element = fragment.nodes.first as html2.Element;
+
+  final String tag = element.localName!;
+  final Map<String, String> attr = element.attributes.map((key, value) => MapEntry(key as String, value));
+
+  return switch (tag) {
+    "video" => html.Video(
+      src: attr["src"]!,
+      width: attr.i("width"),
+      height: attr.i("height"),
+      autoplay: attr.b("autoplay"),
+      controls: attr.b("controls"),
+      disablePictureInPicture: attr.b("disablepictureinpicture"),
+      disableRemotePlayback: attr.b("disableremoteplayback"),
+      loop: attr.b("loop"),
+      muted: attr.b("muted"),
+      playsInline: attr.b("playsinline"),
+    ),
+    _ => throw UnsupportedError("Inline element tag '$tag' not supported!"),
+  };
+}
+
+extension _AttrGetters on Map<String, String> {
+  bool b(String key) => this[key] != null;
+
+  int? i(String key) => this[key] != null ? int.parse(this[key]!) : null;
+}
 
 html.Element mdElementToHtmlElement(md.Element element) {
   final String tag = element.tag;
