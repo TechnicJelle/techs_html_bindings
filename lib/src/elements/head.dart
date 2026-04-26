@@ -36,15 +36,22 @@ class Meta extends Element {
 
   String? content;
 
-  Meta.name({
-    required String name,
+  Meta.name(
+    String name, {
     required this.content,
   }) : key = "name",
        value = name,
        super(children: []);
 
-  Meta.httpEquiv({
-    required String httpEquiv,
+  Meta.property(
+    String property, {
+    required this.content,
+  }) : key = "property",
+       value = property,
+       super(children: []);
+
+  Meta.httpEquiv(
+    String httpEquiv, {
     required this.content,
   }) : key = "http-equiv",
        value = httpEquiv,
