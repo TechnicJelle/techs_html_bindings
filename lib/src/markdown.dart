@@ -1,64 +1,29 @@
-import "package:html/dom.dart" as html2;
-import "package:html/parser.dart" as html2;
-import "package:markdown/markdown.dart" as md;
+import "package:html/dom.dart" as big;
+import "package:html/parser.dart" as big;
+import "package:markdown/markdown.dart";
 import "package:techs_html_bindings/elements.dart" as html;
 
 /// Parse markdown
 List<html.Element> markdown(String markdown) {
-  final md.Document document = md.Document(encodeHtml: false, extensionSet: md.ExtensionSet.gitHubFlavored);
-  final List<md.Node> nodes = document.parse(markdown);
-  final List<html.Element> elements = nodes.map(mdNodeToHtmlElement).toList();
+  final String markdownHtml = markdownToHtml(markdown, encodeHtml: false, extensionSet: .gitHubFlavored);
+  final nodes = big.parseFragment(markdownHtml).nodes;
+  final List<html.Element> elements = nodes.map(bigHtmlToMyHtml).where((e) => e is! Nothing).toList();
   return elements;
 }
 
-html.Element mdNodeToHtmlElement(md.Node node) => switch (node) {
-  md.Element() => mdElementToHtmlElement(node),
-  md.Text(:final text) when text.startsWith(RegExp(r"\s*<\w+.*>")) => inlineHtmlToHtmlElement(text),
-  md.Text(:final text) when text.startsWith(RegExp(r"\s*<!---")) => html.T(""),
-  md.Text() => html.T(node.text),
+html.Element bigHtmlToMyHtml(big.Node node) => switch (node) {
+  big.Element() => bigHtmlElementToMyElement(node),
+  big.Text(:final text) when text.trim().isEmpty => Nothing(),
+  big.Text(:final text) => html.T(text),
+  big.Comment(:final data) when (data?.isNotEmpty ?? false) && data?[0] == "-" => Nothing(),
+  big.Comment(:final data) => html.T("<!--${data ?? ""}-->"),
   _ => throw UnsupportedError("Node type '$node' not supported!"),
 };
 
-html.Element inlineHtmlToHtmlElement(String text) {
-  final fragment = html2.parseFragment(text.trim());
-  final element = fragment.nodes.first as html2.Element;
-
+html.Element bigHtmlElementToMyElement(big.Element element) {
   final String tag = element.localName!;
+  final List<html.Element> children = element.nodes.map(bigHtmlToMyHtml).toList();
   final Map<String, String> attr = element.attributes.map((key, value) => MapEntry(key as String, value));
-
-  return switch (tag) {
-    "video" => html.Video(
-      src: attr["src"]!,
-      width: attr.i("width"),
-      height: attr.i("height"),
-      autoplay: attr.b("autoplay"),
-      controls: attr.b("controls"),
-      disablePictureInPicture: attr.b("disablepictureinpicture"),
-      disableRemotePlayback: attr.b("disableremoteplayback"),
-      loop: attr.b("loop"),
-      muted: attr.b("muted"),
-      playsInline: attr.b("playsinline"),
-    ),
-    "img" => html.Image(
-      src: attr["src"]!,
-      alt: attr["alt"]!,
-      width: attr.i("width"),
-      height: attr.i("height"),
-    ),
-    _ => throw UnsupportedError("Inline element tag '$tag' not supported!"),
-  };
-}
-
-extension _AttrGetters on Map<String, String> {
-  bool b(String key) => this[key] != null;
-
-  int? i(String key) => this[key] != null ? int.parse(this[key]!) : null;
-}
-
-html.Element mdElementToHtmlElement(md.Element element) {
-  final String tag = element.tag;
-  final List<html.Element> children = element.children?.map(mdNodeToHtmlElement).toList() ?? [];
-  final Map<String, String> attr = element.attributes;
   final List<String>? align = attr["align"] != null ? ["text-align: ${attr["align"]}"] : null;
   return switch (tag) {
     "h1" => html.H1(children: children),
@@ -75,7 +40,24 @@ html.Element mdElementToHtmlElement(md.Element element) {
     "a" => html.A(href: attr["href"]!, children: children),
     "em" => html.Em(children: children),
     "strong" => html.Strong(children: children),
-    "img" => html.Image(src: attr["src"]!, alt: attr["alt"]!),
+    "img" => html.Image(
+      src: attr["src"]!,
+      alt: attr["alt"]!,
+      width: attr.i("width"),
+      height: attr.i("height"),
+    ),
+    "video" => html.Video(
+      src: attr["src"]!,
+      width: attr.i("width"),
+      height: attr.i("height"),
+      autoplay: attr.b("autoplay"),
+      controls: attr.b("controls"),
+      disablePictureInPicture: attr.b("disablepictureinpicture"),
+      disableRemotePlayback: attr.b("disableremoteplayback"),
+      loop: attr.b("loop"),
+      muted: attr.b("muted"),
+      playsInline: attr.b("playsinline"),
+    ),
     "blockquote" => html.BlockQuote(children: children, cite: attr["cite"]),
     "ul" => html.UnorderedList(items: children.map((e) => e as html.ListItem)),
     "ol" => html.OrderedList(items: children.map((e) => e as html.ListItem)),
@@ -91,4 +73,17 @@ html.Element mdElementToHtmlElement(md.Element element) {
     ),
     _ => throw UnsupportedError("Element tag '$tag' not supported!"),
   };
+}
+
+class Nothing extends html.Element {
+  Nothing() : super(children: []);
+
+  @override
+  String build() => "";
+}
+
+extension _AttrGetters on Map<String, String> {
+  bool b(String key) => this[key] != null;
+
+  int? i(String key) => this[key] != null ? int.parse(this[key]!) : null;
 }

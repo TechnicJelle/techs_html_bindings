@@ -80,10 +80,20 @@ This concludes the Inline HTML Image Test.
     const String strMarkdown = """
 # Comments Test
 
+<!---->
+<!-- -->
+<!--  -->
+<!-- a -->
+<!--HTML comment-->
 <!-- HTML comment -->
 
 That was an HTML comment.
 
+<!----->
+<!--- -->
+<!---  -->
+<!--- a -->
+<!---Markdown comment-->
 <!--- Markdown comment -->
 
 That was a Markdown comment.
@@ -94,6 +104,6 @@ This concludes the Inline HTML Video Test.
     expect(elements, isNotEmpty);
     final String html = Div(children: elements).build();
     expect(html, contains("<!--"));
-    expect(html, isNot(contains("<!---")));
+    expect(html, isNot(contains(RegExp("<!---[^-]"))));
   });
 }
