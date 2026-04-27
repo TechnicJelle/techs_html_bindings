@@ -71,6 +71,11 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
       head: children.whereType<html.TableHead>().firstOrNull ?? html.TableHead(rows: []),
       body: children.whereType<html.TableBody>().firstOrNull ?? html.TableBody(rows: []),
     ),
+    "summary" => html.Summary(children: children),
+    "details" => html.Details(
+      summary: children.whereType<html.Summary>().firstOrNull ?? html.Summary(children: []),
+      children: children.where((e) => e is! html.Summary),
+    ),
     _ => throw UnsupportedError("Element tag '$tag' not supported!"),
   };
 }

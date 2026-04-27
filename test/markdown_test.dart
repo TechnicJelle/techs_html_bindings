@@ -76,6 +76,29 @@ This concludes the Inline HTML Image Test.
     expect(image.height, 128);
   });
 
+  test("Inline HTML Details & Summary", () {
+    const String strMarkdown = """
+# Inline HTML Details & Summary Test
+
+<details markdown="1"><summary>Click here to read more</summary>
+
+There is more text here!
+
+</details>
+
+This concludes the Inline HTML Details & Summary Test.
+""";
+    final List<Element> elements = markdown(strMarkdown);
+    expect(elements, isNotEmpty);
+    final List<Details> detailses = [];
+    elements.collectOfType(into: detailses);
+    expect(detailses, hasLength(1));
+    final Details details = detailses.first;
+
+    expect(details.summary.innerText, "Click here to read more");
+    expect(details.innerText, "There is more text here!");
+  });
+
   test("Comments", () {
     const String strMarkdown = """
 # Comments Test
