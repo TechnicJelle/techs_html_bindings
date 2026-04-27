@@ -54,4 +54,25 @@ This concludes the Inline HTML Video Test.
     expect(video.muted, isTrue);
     expect(video.loop, isTrue);
   });
+
+  test("Comments", () {
+    const String strMarkdown = """
+# Comments Test
+
+<!-- HTML comment -->
+
+That was an HTML comment.
+
+<!--- Markdown comment -->
+
+That was a Markdown comment.
+
+This concludes the Inline HTML Video Test.
+""";
+    final List<Element> elements = markdown(strMarkdown);
+    expect(elements, isNotEmpty);
+    final String html = Div(children: elements).build();
+    expect(html, contains("<!--"));
+    expect(html, isNot(contains("<!---")));
+  });
 }

@@ -13,7 +13,8 @@ List<html.Element> markdown(String markdown) {
 
 html.Element mdNodeToHtmlElement(md.Node node) => switch (node) {
   md.Element() => mdElementToHtmlElement(node),
-  md.Text(:final text) when text.startsWith(RegExp(r"\s*<.+>")) => inlineHtmlToHtmlElement(text),
+  md.Text(:final text) when text.startsWith(RegExp(r"\s*<\w+.*>")) => inlineHtmlToHtmlElement(text),
+  md.Text(:final text) when text.startsWith(RegExp(r"\s*<!---")) => html.T(""),
   md.Text() => html.T(node.text),
   _ => throw UnsupportedError("Node type '$node' not supported!"),
 };
