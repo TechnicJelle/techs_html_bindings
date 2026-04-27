@@ -44,7 +44,7 @@ extension ElementReplacer on List<Element> {
   /// [test] gives you an element to interrogate.
   /// You must return a list of elements if you want to replace that element with that list.
   /// Return null to not replace that element.
-  void replace({required List<Element>? Function(Element) test}) {
+  void replace({required List<Element>? Function(Element element) test}) {
     for (int i = length - 1; i >= 0; i--) {
       final element = this[i];
       final List<Element>? toReplace = test(element);
