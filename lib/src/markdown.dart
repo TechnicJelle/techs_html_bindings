@@ -20,7 +20,7 @@ html.Element mdNodeToHtmlElement(md.Node node) => switch (node) {
 };
 
 html.Element inlineHtmlToHtmlElement(String text) {
-  final fragment = html2.parseFragment(text);
+  final fragment = html2.parseFragment(text.trim());
   final element = fragment.nodes.first as html2.Element;
 
   final String tag = element.localName!;
@@ -38,6 +38,12 @@ html.Element inlineHtmlToHtmlElement(String text) {
       loop: attr.b("loop"),
       muted: attr.b("muted"),
       playsInline: attr.b("playsinline"),
+    ),
+    "img" => html.Image(
+      src: attr["src"]!,
+      alt: attr["alt"]!,
+      width: attr.i("width"),
+      height: attr.i("height"),
     ),
     _ => throw UnsupportedError("Inline element tag '$tag' not supported!"),
   };

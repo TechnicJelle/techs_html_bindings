@@ -55,6 +55,27 @@ This concludes the Inline HTML Video Test.
     expect(video.loop, isTrue);
   });
 
+  test("Inline HTML Image", () {
+    const String strMarkdown = """
+# Inline HTML Image Test
+
+<img src="logo-128.gif" alt="animated version of my logo" width=128 height=128>
+
+This concludes the Inline HTML Image Test.
+""";
+    final List<Element> elements = markdown(strMarkdown);
+    expect(elements, isNotEmpty);
+    final List<Image> images = [];
+    elements.collectOfType(into: images);
+    expect(images, isNotEmpty);
+    final Image image = images.first;
+
+    expect(image.src, "logo-128.gif");
+    expect(image.alt, "animated version of my logo");
+    expect(image.width, 128);
+    expect(image.height, 128);
+  });
+
   test("Comments", () {
     const String strMarkdown = """
 # Comments Test
