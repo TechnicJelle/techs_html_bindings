@@ -22,7 +22,7 @@ html.Element bigHtmlToMyHtml(big.Node node) => switch (node) {
 
 html.Element bigHtmlElementToMyElement(big.Element element) {
   final String tag = element.localName!;
-  final List<html.Element> children = element.nodes.map(bigHtmlToMyHtml).toList();
+  final List<html.Element> children = element.nodes.map(bigHtmlToMyHtml).where((e) => e is! Nothing).toList();
   final Map<String, String> attr = element.attributes.map((key, value) => MapEntry(key as String, value));
   final List<String>? align = attr["align"] != null ? ["text-align: ${attr["align"]}"] : null;
   return switch (tag) {
