@@ -1,4 +1,5 @@
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/options.dart";
 import "package:techs_html_bindings/utils.dart";
 
 class Head extends Element {
@@ -16,10 +17,10 @@ class Head extends Element {
   }) : super(children: []);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     final Iterable<Iterable<Element>> categories = [metas ?? [], links ?? [], styles ?? []];
     final String concatenated = categories
-        .map((Iterable<Element> els) => els.map((Element el) => el.build()).join("\n"))
+        .map((Iterable<Element> els) => els.map((Element el) => el.build(buildOptions: buildOptions)).join("\n"))
         .join("\n\n");
     return "<head>\n"
         '<meta charset="UTF-8" />\n'
@@ -58,7 +59,7 @@ class Meta extends Element {
        super(children: []);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     if (content != null) {
       return '<meta $key="$value" content="$content" />';
     }
@@ -128,7 +129,7 @@ class Link extends Element {
        );
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return '<link rel="$rel" href="$href"${args.args()} />';
   }
 }
@@ -141,7 +142,7 @@ class Style extends Element {
   }) : super(children: []);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<style>\n"
         "${css.trim()}\n"
         "</style>";
