@@ -5,7 +5,7 @@ import "package:techs_html_bindings/elements.dart";
 
 /// Parse markdown
 List<Element> markdown(String markdown) {
-  List<int> runes = markdown.runes.toList();
+  List<int> runes = "\n$markdown".runes.toList();
   List<Element> final_list = [];
   (final_list, _) = parse_md(runes, 0, return_on_newline: false);
   return final_list;
