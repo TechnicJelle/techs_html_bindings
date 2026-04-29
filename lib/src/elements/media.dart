@@ -31,7 +31,7 @@ class Image extends Element {
     buildOptions ??= BuildOptions.def;
     String modifiers = this.modifiers;
     if (loading != null) modifiers += ' loading="${loading!.name}"';
-    return '<img src="$src" alt="${alt.escape()}"$getImageSize(buildOptions)$modifiers />';
+    return '<img src="$src" alt="${alt.escape()}"${getImageSize(buildOptions)}$modifiers />';
   }
 
   String getImageSize(BuildOptions buildOptions) {
