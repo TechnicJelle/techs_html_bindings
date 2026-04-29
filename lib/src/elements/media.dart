@@ -3,7 +3,6 @@ import "dart:io";
 import "package:image/image.dart" as img;
 import "package:path/path.dart" as p;
 import "package:techs_html_bindings/elements.dart";
-import "package:techs_html_bindings/src/options.dart";
 import "package:techs_html_bindings/utils.dart";
 
 enum Loading { eager, lazy }
@@ -15,6 +14,14 @@ class Image extends Element {
   int? height;
   Loading? loading;
 
+  /// Tells the [autoSize] mechanism where to look for the image file to measure.
+  String? imageRoot;
+
+  /// Use the [imageRoot] parameter,
+  /// or set the `TECHS_IMAGE_ROOT` environment variable in your build script,
+  /// to control from where the [autoSize] mechanism will look.
+  bool autoSize;
+
   Image({
     required this.src,
     required this.alt,
@@ -24,17 +31,18 @@ class Image extends Element {
     this.width,
     this.height,
     this.loading,
+    this.imageRoot,
+    this.autoSize = true,
   }) : super(children: []);
 
   @override
-  String build({BuildOptions? buildOptions}) {
-    buildOptions ??= BuildOptions.def;
+  String build() {
     String modifiers = this.modifiers;
     if (loading != null) modifiers += ' loading="${loading!.name}"';
-    return '<img src="$src" alt="${alt.escape()}"${getImageSize(buildOptions)}$modifiers />';
+    return '<img src="$src" alt="${alt.escape()}"$imageSize$modifiers />';
   }
 
-  String getImageSize(BuildOptions buildOptions) {
+  String get imageSize {
     if (width != null && height != null) {
       return " width=$width height=$height";
     }
@@ -44,8 +52,8 @@ class Image extends Element {
     if (height != null) {
       return " height=$height";
     }
-    if (buildOptions.imgAutoSizeEnabled) {
-      final String? imageRoot = buildOptions.imgAutoSizeRoot ?? Platform.environment["TECHS_IMAGE_ROOT"];
+    if (autoSize) {
+      final String? imageRoot = this.imageRoot ?? Platform.environment["TECHS_IMAGE_ROOT"];
       final file = imageRoot == null ? File(src) : File(p.join(imageRoot, src));
       if (file.existsSync()) {
         final img.Image? imageData = img.decodeImage(file.readAsBytesSync());
@@ -116,7 +124,7 @@ class Video extends Element {
   }
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     String modifiers = this.modifiers;
     if (loading != null) modifiers += ' loading="${loading!.name}"';
     return '<video src="$src"'
@@ -161,7 +169,7 @@ class Source extends Element {
   }) : super(children: const Iterable.empty());
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     String modifiers = this.modifiers;
     if (media != null) modifiers += ' media="$media"';
     if (type != null) modifiers += ' type="$type"';
@@ -207,10 +215,10 @@ class Picture extends Element {
        super(children: const Iterable.empty());
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<picture$modifiers>\n"
-        '\t${sources.map((s) => s.build(buildOptions: buildOptions)).join("\n\t")}\n'
-        "\t${image.build(buildOptions: buildOptions)}\n"
+        '\t${sources.map((s) => s.build()).join("\n\t")}\n'
+        "\t${image.build()}\n"
         "</picture>";
   }
 }
