@@ -1,4 +1,5 @@
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/options.dart";
 
 class ListItem extends Element {
   String? value;
@@ -20,12 +21,12 @@ class ListItem extends Element {
   }) : super(children: [T(text)]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     String modifiers = this.modifiers;
     if (value != null) modifiers += ' value="$value"';
 
     return "<li$modifiers>"
-        '${children.map((el) => el.build()).join("\n")}'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}'
         "</li>";
   }
 }
@@ -41,9 +42,9 @@ class UnorderedList extends Element {
   }) : super(children: items);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<ul$modifiers>\n"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
         "</ul>";
   }
 }
@@ -81,12 +82,12 @@ class OrderedList extends Element {
   }) : super(children: items);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     String modifiers = this.modifiers;
     if (type != null) modifiers += ' type="$type"';
 
     return "<ol$modifiers>\n"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
         "</ol>";
   }
 }

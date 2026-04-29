@@ -1,18 +1,21 @@
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/options.dart";
 
 class T extends Element {
   String text;
 
   T(this.text) : super(children: []);
 
-  T.single(Iterable<Element> elements) : text = elements.map((el) => el.build()).join(), super(children: []);
+  T.single(Iterable<Element> elements, {BuildOptions? buildOptions})
+    : text = elements.map((el) => el.build(buildOptions: buildOptions)).join(),
+      super(children: []);
 
-  T.multiline(Iterable<Element> lines)
-    : text = lines.map((el) => el.build()).join("<br />\n"),
+  T.multiline(Iterable<Element> lines, {BuildOptions? buildOptions})
+    : text = lines.map((el) => el.build(buildOptions: buildOptions)).join("<br />\n"),
       super(children: []);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return text;
   }
 }
@@ -21,7 +24,7 @@ class Br extends Element {
   Br() : super(children: const Iterable.empty());
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<br />";
   }
 }
@@ -42,9 +45,9 @@ class P extends Element {
   }) : super(children: [T(text)]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<p$modifiers>\n"
-        "${children.map((el) => el.build()).join()}\n"
+        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}\n"
         "</p>\n";
   }
 }
@@ -91,11 +94,11 @@ class A extends Element {
        super(children: [T(text)]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     String modifiers = this.modifiers;
     if (target != null) modifiers += ' target="_${target!.name}"';
     return '<a href="$href"$modifiers>'
-        "${children.map((el) => el.build()).join()}"
+        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}"
         "</a>";
   }
 }
@@ -116,9 +119,9 @@ class Span extends Element {
   }) : super(children: [T(text)]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<span$modifiers>"
-        '${children.map((el) => el.build()).join(" ")}'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join(" ")}'
         "</span>";
   }
 }
@@ -139,9 +142,9 @@ class Summary extends Element {
   }) : super(children: [T(text)]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<summary$modifiers>"
-        '${children.map((el) => el.build()).join("\n")}'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}'
         "</summary>";
   }
 }
@@ -158,10 +161,10 @@ class Details extends Element {
   });
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<details$modifiers>\n"
-        "${summary.build()}\n"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        "${summary.build(buildOptions: buildOptions)}\n"
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
         "</details>";
   }
 }
@@ -172,9 +175,9 @@ class Em extends Element {
   Em.text(String text) : super(children: [T(text)]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<em>"
-        "${children.map((el) => el.build()).join()}"
+        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}"
         "</em>";
   }
 }
@@ -185,9 +188,9 @@ class Strong extends Element {
   Strong.text(String text) : super(children: [T(text)]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<strong>"
-        "${children.map((el) => el.build()).join()}"
+        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}"
         "</strong>";
   }
 }

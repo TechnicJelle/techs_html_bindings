@@ -1,4 +1,5 @@
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/options.dart";
 
 class BlockQuote extends Element {
   String? cite;
@@ -12,12 +13,12 @@ class BlockQuote extends Element {
   });
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     String modifiers = this.modifiers;
     if (cite != null) modifiers += ' cite="$cite"';
 
     return "<blockquote$modifiers>"
-        '${children.map((el) => el.build()).join("\n")}'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}'
         "</blockquote>";
   }
 }
@@ -34,12 +35,12 @@ class Q extends Element {
   });
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     String modifiers = this.modifiers;
     if (cite != null) modifiers += ' cite="$cite"';
 
     return "<q$modifiers>"
-        "${children.map((el) => el.build()).join()}"
+        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}"
         "</q>";
   }
 }
