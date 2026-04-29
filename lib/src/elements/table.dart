@@ -1,5 +1,4 @@
 import "package:techs_html_bindings/elements.dart";
-import "package:techs_html_bindings/src/options.dart";
 
 class Table extends Element {
   TableCaption? caption;
@@ -16,12 +15,12 @@ class Table extends Element {
   }) : super(children: [head, body]);
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     final thisCaption = caption;
     return "<table$modifiers>\n"
-        "${thisCaption == null ? "" : "${thisCaption.build(buildOptions: buildOptions)}\n"}"
-        "${head.build(buildOptions: buildOptions)}\n"
-        "${body.build(buildOptions: buildOptions)}\n"
+        "${thisCaption == null ? "" : "${thisCaption.build()}\n"}"
+        "${head.build()}\n"
+        "${body.build()}\n"
         "</table>";
   }
 }
@@ -35,9 +34,9 @@ class TableCaption extends Element {
   });
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<caption$modifiers>\n"
-        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
+        '${children.map((el) => el.build()).join("\n")}\n'
         "</caption>";
   }
 }
@@ -53,9 +52,9 @@ class TableHead extends Element {
   }) : super(children: rows);
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<thead$modifiers>\n"
-        '${rows.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
+        '${rows.map((el) => el.build()).join("\n")}\n'
         "</thead>";
   }
 }
@@ -71,9 +70,9 @@ class TableBody extends Element {
   }) : super(children: rows);
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<tbody$modifiers>\n"
-        '${rows.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
+        '${rows.map((el) => el.build()).join("\n")}\n'
         "</tbody>";
   }
 }
@@ -89,9 +88,9 @@ class TableRow extends Element {
   }) : super(children: cells);
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<tr$modifiers>\n"
-        '${cells.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
+        '${cells.map((el) => el.build()).join("\n")}\n'
         "</tr>";
   }
 }
@@ -114,9 +113,9 @@ class TableHeader extends TableCell {
   });
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<th$modifiers>"
-        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}"
+        "${children.map((el) => el.build()).join()}"
         "</th>";
   }
 }
@@ -130,9 +129,9 @@ class TableData extends TableCell {
   });
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<td$modifiers>"
-        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}"
+        "${children.map((el) => el.build()).join()}"
         "</td>";
   }
 }

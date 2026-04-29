@@ -1,5 +1,4 @@
 import "package:techs_html_bindings/elements.dart";
-import "package:techs_html_bindings/src/options.dart";
 
 class Pre extends Element {
   Pre({
@@ -10,9 +9,9 @@ class Pre extends Element {
   });
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<pre$modifiers>"
-        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}'
+        '${children.map((el) => el.build()).join("\n")}'
         "</pre>";
   }
 }
@@ -26,9 +25,9 @@ class Code extends Element {
   });
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<code$modifiers>"
-        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}'
+        '${children.map((el) => el.build()).join("\n")}'
         "</code>";
   }
 }

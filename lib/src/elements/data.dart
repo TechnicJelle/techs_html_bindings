@@ -1,5 +1,4 @@
 import "package:techs_html_bindings/elements.dart";
-import "package:techs_html_bindings/src/options.dart";
 
 class Address extends Element {
   Address({
@@ -10,9 +9,9 @@ class Address extends Element {
   });
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return "<address$modifiers>"
-        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
+        '${children.map((el) => el.build()).join("\n")}\n'
         "</address>";
   }
 }
@@ -44,9 +43,9 @@ class Time extends Element {
   }
 
   @override
-  String build({BuildOptions? buildOptions}) {
+  String build() {
     return '<time datetime="$datetime"$modifiers>'
-        "${children.map((el) => el.build(buildOptions: buildOptions)).join()}"
+        "${children.map((el) => el.build()).join()}"
         "</time>";
   }
 }
