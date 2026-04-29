@@ -2,6 +2,7 @@ import "package:html/dom.dart" as big;
 import "package:html/parser.dart" as big;
 import "package:markdown/markdown.dart";
 import "package:techs_html_bindings/elements.dart" as html;
+import "package:techs_html_bindings/options.dart";
 
 /// Parse markdown
 List<html.Element> markdown(String markdown) {
@@ -84,7 +85,7 @@ class Nothing extends html.Element {
   Nothing() : super(children: []);
 
   @override
-  String build() => "";
+  String build({BuildOptions? buildOptions}) => "";
 }
 
 extension _AttrGetters on Map<String, String> {
