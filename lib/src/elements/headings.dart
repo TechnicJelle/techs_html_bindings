@@ -9,7 +9,7 @@ abstract class Hn extends Element {
   ///Override this if you want to display something else than a 🔗 as the link.
   static Element autoLinkElement = T("🔗");
 
-  int level;
+  final int level;
   bool autoLink;
 
   Hn({
