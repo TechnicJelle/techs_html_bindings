@@ -1,4 +1,5 @@
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/options.dart";
 
 class Div extends Element {
   Div({
@@ -10,9 +11,9 @@ class Div extends Element {
   });
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<div$modifiers>\n"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
         "</div>";
   }
 }
@@ -26,9 +27,9 @@ class Section extends Element {
   });
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<section$modifiers>\n"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
         "</section>";
   }
 }
@@ -42,9 +43,9 @@ class Nav extends Element {
   });
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<nav$modifiers>\n"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
         "</nav>";
   }
 }
@@ -58,9 +59,9 @@ class Aside extends Element {
   });
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<aside$modifiers>\n"
-        '${children.map((el) => el.build()).join("\n")}\n'
+        '${children.map((el) => el.build(buildOptions: buildOptions)).join("\n")}\n'
         "</aside>";
   }
 }

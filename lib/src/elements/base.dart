@@ -1,4 +1,5 @@
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/options.dart";
 import "package:techs_html_bindings/utils.dart";
 
 abstract class Element {
@@ -18,7 +19,7 @@ abstract class Element {
 
   String get modifiers => "${id.id()}${classes.classes()}${inlineStyles.styles()}${args.args()}";
 
-  String build();
+  String build({BuildOptions? buildOptions});
 
   void collectChildrenOfType<E>({required List<E> into}) {
     children.collectOfType(into: into);
@@ -52,11 +53,11 @@ class HTML extends Element {
   }) : super(children: [body]);
 
   @override
-  String build() {
+  String build({BuildOptions? buildOptions}) {
     return "<!DOCTYPE html>\n"
         '<html lang="$lang">\n'
-        "${head.build()}\n\n"
-        "${body.build()}\n"
+        "${head.build(buildOptions: buildOptions)}\n\n"
+        "${body.build(buildOptions: buildOptions)}\n"
         "</html>";
   }
 }
