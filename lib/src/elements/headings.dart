@@ -30,7 +30,7 @@ abstract class Hn extends Element {
   ///
   /// If [autoLink] is null (or not provided), it will use the default options for each specific heading level:\
   /// `H1`, `H5`, `H6` *do not* get auto-linked. `H2`, `H3`, `H4` *do* get auto-linked.
-  static Hn fromLevel({
+  factory Hn.fromLevel({
     required int level,
     required Iterable<Element> children,
     String? id,
