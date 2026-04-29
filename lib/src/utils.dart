@@ -10,7 +10,7 @@ extension StringCleaning on String {
   }
 
   String clean() {
-    return toLowerCase().replaceAll(RegExp("[^a-z0-9 ]"), "").trim().replaceAll(" ", "-");
+    return toLowerCase().replaceAll(RegExp("[^a-z0-9 ]"), "").trim().replaceAll(RegExp(" +"), "-");
   }
 }
 
