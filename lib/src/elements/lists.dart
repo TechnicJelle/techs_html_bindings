@@ -57,15 +57,13 @@ enum OrderedListType {
   ;
 
   @override
-  String toString() {
-    return switch (this) {
-      OrderedListType.lowercaseLetters => "a",
-      OrderedListType.uppercaseLetters => "A",
-      OrderedListType.lowercaseRomanNumerals => "i",
-      OrderedListType.uppercaseRomanNumerals => "I",
-      OrderedListType.numbers => "1",
-    };
-  }
+  String toString() => switch (this) {
+    OrderedListType.lowercaseLetters => "a",
+    OrderedListType.uppercaseLetters => "A",
+    OrderedListType.lowercaseRomanNumerals => "i",
+    OrderedListType.uppercaseRomanNumerals => "I",
+    OrderedListType.numbers => "1",
+  };
 }
 
 class OrderedList extends Element {
