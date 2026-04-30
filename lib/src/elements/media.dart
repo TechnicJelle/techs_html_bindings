@@ -25,14 +25,14 @@ class Image extends Element {
   Image({
     required this.src,
     required this.alt,
-    super.id,
-    super.classes,
-    super.inlineStyles,
     this.width,
     this.height,
     this.loading,
     this.imageRoot,
     this.autoSize = true,
+    super.id,
+    super.classes,
+    super.inlineStyles,
   }) : super(children: []);
 
   @override
