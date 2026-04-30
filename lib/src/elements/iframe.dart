@@ -62,8 +62,11 @@ class IFrame extends Element {
     this.sandbox,
     super.id,
     super.classes,
-    super.inlineStyles,
-  }) : super(children: []);
+    Iterable<String>? inlineStyles,
+  }) : super(
+         inlineStyles: ["border: 0", ...?inlineStyles],
+         children: [],
+       );
 
   @override
   String build() {
