@@ -12,7 +12,7 @@ class Table extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: [head, body]);
+  }) : super(children: [?caption, head, body]);
 
   @override
   String build() {
