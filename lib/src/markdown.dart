@@ -45,6 +45,7 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
       alt: attr["alt"]!,
       width: attr.i("width"),
       height: attr.i("height"),
+      loading: .fromString(attr["loading"]),
     ),
     "video" => html.Video(
       src: attr["src"]!,
@@ -57,6 +58,7 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
       loop: attr.b("loop"),
       muted: attr.b("muted"),
       playsInline: attr.b("playsinline"),
+      loading: .fromString(attr["loading"]),
     ),
     "blockquote" => html.BlockQuote(children: children, cite: attr["cite"]),
     "ul" => html.UnorderedList(items: children.map((e) => e as html.ListItem)),

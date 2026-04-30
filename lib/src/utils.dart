@@ -94,3 +94,10 @@ extension MapToInsertables on Map<String, String?>? {
     return sb.toString();
   }
 }
+
+extension EnumFromStringHelper<E extends Enum> on Iterable<E> {
+  E? fromString(String? s) {
+    if (s == null) return null;
+    return asNameMap()[s] ?? (throw ArgumentError("String `$s` is not a valid value for $E!", "s"));
+  }
+}
