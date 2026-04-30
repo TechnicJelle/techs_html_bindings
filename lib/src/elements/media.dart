@@ -65,7 +65,7 @@ class Image extends Element {
           "max-width: 100%",
           "height: auto",
           "max-height: ${imageData.height}px",
-          ...inlineStyles ?? [],
+          ...?inlineStyles,
         ];
         return " width=${imageData.width} height=${imageData.height}";
       }
