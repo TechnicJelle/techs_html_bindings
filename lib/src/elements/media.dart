@@ -53,13 +53,13 @@ class Image extends Element {
 
   String get imageSize {
     if (width != null && height != null) {
-      return " width=$width height=$height";
+      return ' width="$width" height="$height"';
     }
     if (width != null) {
-      return " width=$width";
+      return ' width="$width"';
     }
     if (height != null) {
-      return " height=$height";
+      return ' height="$height"';
     }
     if (autoSize) {
       final String? imageRoot = this.imageRoot ?? Platform.environment["TECHS_IMAGE_ROOT"];
@@ -73,7 +73,7 @@ class Image extends Element {
           "max-height: ${imageData.height}px",
           ...?inlineStyles,
         ];
-        return " width=${imageData.width} height=${imageData.height}";
+        return ' width="${imageData.width}" height="${imageData.height}"';
       }
     }
     return "";
@@ -151,13 +151,13 @@ class Video extends Element {
 
   String get imageSize {
     if (width != null && height != null) {
-      return " width=$width height=$height";
+      return ' width="$width" height="$height"';
     }
     if (width != null) {
-      return " width=$width";
+      return ' width="$width"';
     }
     if (height != null) {
-      return " height=$height";
+      return ' height="$height"';
     }
     return "";
   }
