@@ -24,7 +24,7 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
   final String tag = element.localName!;
   final List<html.Element> children = element.nodes.map(bigHtmlToMyHtml).where((e) => e is! Nothing).toList();
   final Map<String, String> attr = element.attributes.map((key, value) => MapEntry(key as String, value));
-  final List<String>? align = attr["align"] != null ? ["text-align: ${attr["align"]}"] : null;
+  final List<String>? align = attr.containsKey("align") ? ["text-align: ${attr["align"]}"] : null;
   return switch (tag) {
     "h1" => html.H1(children: children),
     "h2" => html.H2(children: children),
@@ -90,7 +90,7 @@ class Nothing extends html.Element {
 }
 
 extension _AttrGetters on Map<String, String> {
-  bool b(String key) => this[key] != null;
+  bool b(String key) => containsKey(key);
 
-  int? i(String key) => this[key] != null ? int.parse(this[key]!) : null;
+  int? i(String key) => containsKey(key) ? int.parse(this[key]!) : null;
 }
