@@ -7,6 +7,7 @@ export "src/elements/code.dart";
 export "src/elements/data.dart";
 export "src/elements/head.dart";
 export "src/elements/headings.dart";
+export "src/elements/iframe.dart";
 export "src/elements/layout.dart";
 export "src/elements/lists.dart";
 export "src/elements/media.dart";
