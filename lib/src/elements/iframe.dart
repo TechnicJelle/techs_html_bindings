@@ -80,13 +80,13 @@ class IFrame extends Element {
 
   String get imageSize {
     if (width != null && height != null) {
-      return " width=$width height=$height";
+      return ' width="$width" height="$height"';
     }
     if (width != null) {
-      return " width=$width";
+      return ' width="$width"';
     }
     if (height != null) {
-      return " height=$height";
+      return ' height="$height"';
     }
     return "";
   }
