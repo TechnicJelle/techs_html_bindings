@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/utils.dart";
 
 part "copyWith/iframe.dart";
 
@@ -17,6 +18,8 @@ enum ReferrerPolicy {
   final String value;
 
   const ReferrerPolicy(this.value);
+
+  static ReferrerPolicy? fromString(String? s) => values.fromStringMapped(s, (e) => e.value);
 }
 
 enum Sandbox {
@@ -39,6 +42,8 @@ enum Sandbox {
   final String value;
 
   const Sandbox(this.value);
+
+  static Sandbox? fromString(String? s) => values.fromStringMapped(s, (e) => e.value);
 }
 
 class IFrame extends Element {

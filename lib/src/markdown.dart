@@ -78,6 +78,28 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
       summary: children.whereType<html.Summary>().firstOrNull ?? html.Summary(children: []),
       children: children.where((e) => e is! html.Summary).toList(),
     ),
+    "iframe" => () {
+      if (attr.containsKey("allowfullscreen")) {
+        throw Exception(
+          "IFrame has `allowfullscreen`, which is not supported. Use the proper `allow` parameter instead.",
+        );
+      }
+      if (attr.containsKey("frameborder")) {
+        throw Exception(
+          "IFrame has `frameborder`, which is not supported. All IFrames have an inline style that removes the border already.",
+        );
+      }
+      return html.IFrame(
+        src: attr["src"]!,
+        title: attr["title"]!,
+        width: attr.i("width"),
+        height: attr.i("height"),
+        loading: .fromString(attr["loading"]),
+        allow: attr["allow"],
+        referrerPolicy: .fromString(attr["referrerpolicy"]),
+        sandbox: attr.sandbox(),
+      );
+    }(),
     _ => throw UnsupportedError("Element tag '$tag' not supported!"),
   };
 }
@@ -93,4 +115,12 @@ extension _AttrGetters on Map<String, String> {
   bool b(String key) => containsKey(key);
 
   int? i(String key) => containsKey(key) ? int.parse(this[key]!) : null;
+
+  Set<html.Sandbox>? sandbox() {
+    final String? value = this["sandbox"]?.trim();
+    if (value == null) return null;
+    if (value.isEmpty) return {};
+
+    return value.split(RegExp(r"\s+")).map(html.Sandbox.fromString).nonNulls.toSet();
+  }
 }

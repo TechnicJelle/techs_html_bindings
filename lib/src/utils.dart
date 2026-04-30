@@ -100,4 +100,12 @@ extension EnumFromStringHelper<E extends Enum> on Iterable<E> {
     if (s == null) return null;
     return asNameMap()[s] ?? (throw ArgumentError("String `$s` is not a valid value for $E!", "s"));
   }
+
+  E? fromStringMapped(String? s, String Function(E value) mapper) {
+    if (s == null) return null;
+    for (final value in this) {
+      if (mapper(value) == s) return value;
+    }
+    throw ArgumentError("String `$s` is not a valid value for $E!", "s");
+  }
 }
