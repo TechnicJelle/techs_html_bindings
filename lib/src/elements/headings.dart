@@ -1,6 +1,9 @@
 // dart format width=144
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
+
+part "copyWith/headings.dart";
 
 abstract class Hn extends Element {
   ///Override this if you want the automatic links to have a different class.
@@ -10,6 +13,7 @@ abstract class Hn extends Element {
   static Element autoLinkElement = T("🔗");
 
   final int level;
+  bool autoID;
   bool autoLink;
 
   Hn({
@@ -18,7 +22,7 @@ abstract class Hn extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
-    bool autoID = true,
+    this.autoID = true,
     this.autoLink = true,
   }) {
     if (id == null && autoID) {

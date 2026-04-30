@@ -1,4 +1,7 @@
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+
+part "copyWith/layout.dart";
 
 class Div extends Element {
   Div({

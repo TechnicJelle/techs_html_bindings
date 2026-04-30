@@ -1,4 +1,7 @@
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+
+part "copyWith/lists.dart";
 
 class ListItem extends Element {
   String? value;

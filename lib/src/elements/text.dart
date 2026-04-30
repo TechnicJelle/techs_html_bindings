@@ -1,4 +1,7 @@
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+
+part "copyWith/text.dart";
 
 class T extends Element {
   String text;

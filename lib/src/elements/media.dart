@@ -1,9 +1,12 @@
 import "dart:io";
 
 import "package:image/image.dart" as img;
+import "package:meta/meta.dart";
 import "package:path/path.dart" as p;
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
+
+part "copyWith/media.dart";
 
 enum Loading { eager, lazy }
 

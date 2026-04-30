@@ -1,5 +1,8 @@
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
+
+part "copyWith/head.dart";
 
 class Head extends Element {
   String title;
