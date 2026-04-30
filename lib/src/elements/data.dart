@@ -1,4 +1,7 @@
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+
+part "copyWith/data.dart";
 
 class Address extends Element {
   Address({
@@ -21,11 +24,19 @@ class Time extends Element {
 
   Time({
     required this.datetime,
-    required String visible,
+    required super.children,
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: [T(visible)]);
+  });
+
+  Time.text(
+    String text, {
+    required this.datetime,
+    super.id,
+    super.classes,
+    super.inlineStyles,
+  }) : super(children: [T(text)]);
 
   factory Time.now({
     String? id,
@@ -33,9 +44,9 @@ class Time extends Element {
     Iterable<String>? inlineStyles,
   }) {
     final now = DateTime.now();
-    return Time(
+    return Time.text(
+      now.copyWith(microsecond: 0).toIso8601String().replaceAll("T", " "),
       datetime: now.toIso8601String(),
-      visible: now.copyWith(microsecond: 0).toIso8601String().replaceAll("T", " "),
       id: id,
       classes: classes,
       inlineStyles: inlineStyles,

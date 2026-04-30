@@ -1,4 +1,7 @@
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+
+part "copyWith/table.dart";
 
 class Table extends Element {
   TableCaption? caption;
@@ -12,7 +15,7 @@ class Table extends Element {
     super.id,
     super.classes,
     super.inlineStyles,
-  }) : super(children: [head, body]);
+  }) : super(children: [?caption, head, body]);
 
   @override
   String build() {

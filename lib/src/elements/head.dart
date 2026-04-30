@@ -1,5 +1,8 @@
+import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/utils.dart";
+
+part "copyWith/head.dart";
 
 class Head extends Element {
   String title;
@@ -13,11 +16,11 @@ class Head extends Element {
     this.metas,
     this.links,
     this.styles,
-  }) : super(children: []);
+  }) : super(children: [...?metas, ...?links, ...?styles]);
 
   @override
   String build() {
-    final Iterable<Iterable<Element>> categories = [metas ?? [], links ?? [], styles ?? []];
+    final Iterable<Iterable<Element>> categories = [?metas, ?links, ?styles];
     final String concatenated = categories
         .map((Iterable<Element> els) => els.map((Element el) => el.build()).join("\n"))
         .join("\n\n");
