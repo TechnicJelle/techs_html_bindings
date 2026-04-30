@@ -52,21 +52,16 @@ class UnorderedList extends Element {
 }
 
 enum OrderedListType {
-  lowercaseLetters,
-  uppercaseLetters,
-  lowercaseRomanNumerals,
-  uppercaseRomanNumerals,
-  numbers
+  lowercaseLetters("a"),
+  uppercaseLetters("A"),
+  lowercaseRomanNumerals("i"),
+  uppercaseRomanNumerals("I"),
+  numbers("1")
   ;
 
-  @override
-  String toString() => switch (this) {
-    OrderedListType.lowercaseLetters => "a",
-    OrderedListType.uppercaseLetters => "A",
-    OrderedListType.lowercaseRomanNumerals => "i",
-    OrderedListType.uppercaseRomanNumerals => "I",
-    OrderedListType.numbers => "1",
-  };
+  final String value;
+
+  const OrderedListType(this.value);
 }
 
 class OrderedList extends Element {
@@ -84,7 +79,7 @@ class OrderedList extends Element {
   @override
   String build() {
     String modifiers = this.modifiers;
-    if (type != null) modifiers += ' type="$type"';
+    if (type != null) modifiers += ' type="${type!.value}"';
 
     return "<ol$modifiers>\n"
         '${children.map((el) => el.build()).join("\n")}\n'
