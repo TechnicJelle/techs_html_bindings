@@ -25,6 +25,7 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
   final List<html.Element> children = element.nodes.map(bigHtmlToMyHtml).where((e) => e is! Nothing).toList();
   final Map<String, String> attr = element.attributes.map((key, value) => MapEntry(key as String, value));
   final List<String>? align = attr.containsKey("align") ? ["text-align: ${attr["align"]}"] : null;
+  final List<String>? classes = attr.containsKey("class") ? attr["class"]?.split(RegExp(r"\s")) : null;
   return switch (tag) {
     "h1" => html.H1(children: children),
     "h2" => html.H2(children: children),
@@ -73,6 +74,7 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
       head: children.whereType<html.TableHead>().firstOrNull ?? html.TableHead(rows: []),
       body: children.whereType<html.TableBody>().firstOrNull ?? html.TableBody(rows: []),
     ),
+    "div" => html.Div(children: children, classes: classes),
     "summary" => html.Summary(children: children),
     "details" => html.Details(
       summary: children.whereType<html.Summary>().firstOrNull ?? html.Summary(children: []),
