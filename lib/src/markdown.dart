@@ -75,6 +75,7 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
       body: children.whereType<html.TableBody>().firstOrNull ?? html.TableBody(rows: []),
     ),
     "div" => html.Div(children: children, classes: classes),
+    "span" => html.Span(children: children, classes: classes),
     "summary" => html.Summary(children: children),
     "details" => html.Details(
       summary: children.whereType<html.Summary>().firstOrNull ?? html.Summary(children: []),
