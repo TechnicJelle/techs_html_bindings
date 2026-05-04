@@ -5,7 +5,7 @@ import "package:techs_html_bindings/elements.dart" as html;
 
 /// Parse markdown
 List<html.Element> markdown(String markdown) {
-  final String markdownHtml = markdownToHtml(markdown, encodeHtml: false, extensionSet: .gitHubFlavored);
+  final String markdownHtml = markdownToHtml(markdown, extensionSet: .gitHubFlavored);
   final nodes = big.parseFragment(markdownHtml).nodes;
   final List<html.Element> elements = nodes.map(bigHtmlToMyHtml).where((e) => e is! Nothing).toList();
   return elements;
