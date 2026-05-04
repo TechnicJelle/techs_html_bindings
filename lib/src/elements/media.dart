@@ -130,6 +130,11 @@ class Video extends Element {
     if (controlsList != null && !controls) {
       throw Exception("ControlsList is defined, but controls is disabled!");
     }
+    if (!autoplay && !controls) {
+      throw Exception(
+        "Autoplay is not enabled, but controls are also not enabled! The video cannot be started like this.",
+      );
+    }
   }
 
   @override
