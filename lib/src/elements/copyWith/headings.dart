@@ -7,6 +7,46 @@ part of "../headings.dart";
 
 const Object _sentinel = Object();
 
+abstract interface class _HnCopyWith {
+  @useResult
+  Hn call({
+    Iterable<Element> children,
+    String? id,
+    Iterable<String>? classes,
+    Iterable<String>? inlineStyles,
+    bool autoID,
+    bool autoLink,
+  });
+}
+
+class _HnCopyWithImpl implements _HnCopyWith {
+  final Hn _value;
+
+  const _HnCopyWithImpl(this._value);
+
+  @override
+  Hn call({
+    Object? children,
+    Object? id = _sentinel,
+    Object? classes = _sentinel,
+    Object? inlineStyles = _sentinel,
+    Object? autoID,
+    Object? autoLink,
+  }) => Hn.fromLevel(
+    level: _value.level,
+    children: children == null ? _value.children : children as Iterable<Element>,
+    id: identical(id, _sentinel) ? _value.id : id as String?,
+    classes: identical(classes, _sentinel) ? _value.classes : classes as Iterable<String>?,
+    inlineStyles: identical(inlineStyles, _sentinel) ? _value.inlineStyles : inlineStyles as Iterable<String>?,
+    autoID: autoID == null ? _value.autoID : autoID as bool,
+    autoLink: autoLink == null ? _value.autoLink : autoLink as bool,
+  );
+}
+
+extension HnCopyWith on Hn {
+  _HnCopyWith get copyWith => _HnCopyWithImpl(this);
+}
+
 abstract interface class _H1CopyWith {
   @useResult
   H1 call({
