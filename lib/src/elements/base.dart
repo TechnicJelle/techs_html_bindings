@@ -28,12 +28,13 @@ abstract class Element {
   }
 
   String get innerText {
-    final List<T> texts = [];
-    collectChildrenOfType(into: texts);
-    final sb = StringBuffer();
-    for (final T text in texts) {
-      sb.write(text.text);
+    if (this case T(:final text)) return text.replaceAll("\n", " ");
+
+    final StringBuffer sb = StringBuffer();
+    for (final child in children) {
+      sb.write(child.innerText);
     }
+    sb.write(" ");
     return sb.toString();
   }
 
