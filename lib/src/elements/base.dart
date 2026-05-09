@@ -27,12 +27,14 @@ abstract class Element {
     children.collectOfType(into: into);
   }
 
-  String get innerText {
+  String get innerText => _innerText.trimRight();
+
+  String get _innerText {
     if (this case T(:final text)) return text.replaceAll("\n", " ");
 
     final StringBuffer sb = StringBuffer();
     for (final child in children) {
-      sb.write(child.innerText);
+      sb.write(child._innerText);
     }
     sb.write(" ");
     return sb.toString();
