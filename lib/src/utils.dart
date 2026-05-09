@@ -38,6 +38,8 @@ extension ElementCollector on Iterable<Element> {
       element.children.collectOfType(into: into);
     }
   }
+
+  Iterable<E> mapToList<E>(E Function(Element e) toElement) => map<E>(toElement).toList();
 }
 
 extension ElementReplacer on List<Element> {

@@ -2,6 +2,7 @@ import "package:html/dom.dart" as big;
 import "package:html/parser.dart" as big;
 import "package:markdown/markdown.dart";
 import "package:techs_html_bindings/elements.dart" as html;
+import "package:techs_html_bindings/utils.dart";
 
 /// Parse markdown
 List<html.Element> markdown(String markdown) {
@@ -62,14 +63,14 @@ html.Element bigHtmlElementToMyElement(big.Element element) {
       loading: .fromString(attr["loading"]),
     ),
     "blockquote" => html.BlockQuote(children: children, cite: attr["cite"]),
-    "ul" => html.UnorderedList(items: children.map((e) => e as html.ListItem)),
-    "ol" => html.OrderedList(items: children.map((e) => e as html.ListItem)),
+    "ul" => html.UnorderedList(items: children.mapToList((e) => e as html.ListItem)),
+    "ol" => html.OrderedList(items: children.mapToList((e) => e as html.ListItem)),
     "li" => html.ListItem(children: children),
     "th" => html.TableHeader(children: children, inlineStyles: align),
-    "tr" => html.TableRow(cells: children.map((e) => e as html.TableCell)),
-    "thead" => html.TableHead(rows: children.map((e) => e as html.TableRow)),
+    "tr" => html.TableRow(cells: children.mapToList((e) => e as html.TableCell)),
+    "thead" => html.TableHead(rows: children.mapToList((e) => e as html.TableRow)),
     "td" => html.TableData(children: children, inlineStyles: align),
-    "tbody" => html.TableBody(rows: children.map((e) => e as html.TableRow)),
+    "tbody" => html.TableBody(rows: children.mapToList((e) => e as html.TableRow)),
     "table" => html.Table(
       head: children.whereType<html.TableHead>().firstOrNull ?? html.TableHead(rows: []),
       body: children.whereType<html.TableBody>().firstOrNull ?? html.TableBody(rows: []),
