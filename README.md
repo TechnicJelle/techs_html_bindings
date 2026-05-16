@@ -48,7 +48,7 @@ A more complete example can be found in the [example](example) directory.
 
 The API Documentation can be found [here](https://technicjelle.com/techs_html_bindings/).
 
-A full usage demonstration can be seen on my portfolio website:
+A full usage demonstration can be seen on my personal website:
 [github.com/TechnicJelle/TechnicJelle](https://github.com/TechnicJelle/TechnicJelle)
 
 ### A few notes
