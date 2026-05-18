@@ -40,6 +40,8 @@ class Image extends Element {
 
   @override
   String build() {
+    // Explicitly load image size before stringing the modifiers, to ensure any added inlineStyles will get inserted into the string as well
+    final String imageSize = this.imageSize;
     String modifiers = this.modifiers;
     if (loading != null) modifiers += ' loading="${loading!.name}"';
     return '<img src="$src" alt="${alt.escape()}"$imageSize$modifiers />';
