@@ -94,3 +94,13 @@ extension MapToInsertables on Map<String, String?>? {
     return sb.toString();
   }
 }
+
+extension CloningHelpers on Element {
+  List<Element> cloneChildren() => children.map((Element e) => e.clone()).toList();
+
+  List<String>? cloneClasses() => classes?.toList();
+
+  List<String>? cloneInlineStyles() => inlineStyles?.toList();
+
+  Map<String, String?>? cloneArgs() => args == null ? null : Map.of(args!);
+}

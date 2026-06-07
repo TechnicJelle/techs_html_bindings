@@ -23,6 +23,9 @@ abstract class Element {
 
   String build();
 
+  /// Makes a deep copy of the element
+  Element clone();
+
   void collectChildrenOfType<E>({required List<E> into}) {
     children.collectOfType(into: into);
   }
@@ -65,4 +68,11 @@ class HTML extends Element {
         "${body.build()}\n"
         "</html>";
   }
+
+  @override
+  HTML clone() => HTML(
+    lang: lang,
+    head: head.clone(),
+    body: body.clone(),
+  );
 }

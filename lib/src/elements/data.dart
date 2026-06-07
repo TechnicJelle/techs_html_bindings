@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/utils.dart";
 
 part "copyWith/data.dart";
 
@@ -17,6 +18,14 @@ class Address extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</address>";
   }
+
+  @override
+  Address clone() => Address(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Time extends Element {
@@ -59,4 +68,13 @@ class Time extends Element {
         "${children.map((el) => el.build()).join()}"
         "</time>";
   }
+
+  @override
+  Time clone() => Time(
+    datetime: datetime,
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }

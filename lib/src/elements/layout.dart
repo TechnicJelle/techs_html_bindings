@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/utils.dart";
 
 part "copyWith/layout.dart";
 
@@ -18,6 +19,15 @@ class Div extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</div>";
   }
+
+  @override
+  Div clone() => Div(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+    args: cloneArgs(),
+  );
 }
 
 class Section extends Element {
@@ -34,6 +44,14 @@ class Section extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</section>";
   }
+
+  @override
+  Section clone() => Section(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Nav extends Element {
@@ -50,6 +68,14 @@ class Nav extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</nav>";
   }
+
+  @override
+  Nav clone() => Nav(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Aside extends Element {
@@ -66,4 +92,12 @@ class Aside extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</aside>";
   }
+
+  @override
+  Aside clone() => Aside(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }

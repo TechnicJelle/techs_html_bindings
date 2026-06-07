@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/utils.dart";
 
 part "copyWith/table.dart";
 
@@ -26,6 +27,16 @@ class Table extends Element {
         "${body.build()}\n"
         "</table>";
   }
+
+  @override
+  Table clone() => Table(
+    head: head.clone(),
+    body: body.clone(),
+    caption: caption?.clone(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class TableCaption extends Element {
@@ -42,6 +53,14 @@ class TableCaption extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</caption>";
   }
+
+  @override
+  TableCaption clone() => TableCaption(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class TableHead extends Element {
@@ -60,6 +79,14 @@ class TableHead extends Element {
         '${rows.map((el) => el.build()).join("\n")}\n'
         "</thead>";
   }
+
+  @override
+  TableHead clone() => TableHead(
+    rows: rows.map((TableRow r) => r.clone()).toList(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class TableBody extends Element {
@@ -78,6 +105,14 @@ class TableBody extends Element {
         '${rows.map((el) => el.build()).join("\n")}\n'
         "</tbody>";
   }
+
+  @override
+  TableBody clone() => TableBody(
+    rows: rows.map((TableRow r) => r.clone()).toList(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class TableRow extends Element {
@@ -96,6 +131,14 @@ class TableRow extends Element {
         '${cells.map((el) => el.build()).join("\n")}\n'
         "</tr>";
   }
+
+  @override
+  TableRow clone() => TableRow(
+    cells: cells.map((TableCell c) => c.clone()).toList(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 abstract class TableCell extends Element {
@@ -105,6 +148,9 @@ abstract class TableCell extends Element {
     super.classes,
     super.inlineStyles,
   });
+
+  @override
+  TableCell clone();
 }
 
 class TableHeader extends TableCell {
@@ -121,6 +167,14 @@ class TableHeader extends TableCell {
         "${children.map((el) => el.build()).join()}"
         "</th>";
   }
+
+  @override
+  TableHeader clone() => TableHeader(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class TableData extends TableCell {
@@ -137,4 +191,12 @@ class TableData extends TableCell {
         "${children.map((el) => el.build()).join()}"
         "</td>";
   }
+
+  @override
+  TableData clone() => TableData(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }

@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/utils.dart";
 
 part "copyWith/text.dart";
 
@@ -18,6 +19,11 @@ class T extends Element {
   String build() {
     return text;
   }
+
+  @override
+  T clone() => T(
+    text,
+  );
 }
 
 class Br extends Element {
@@ -27,6 +33,9 @@ class Br extends Element {
   String build() {
     return "<br />";
   }
+
+  @override
+  Br clone() => Br();
 }
 
 class P extends Element {
@@ -50,6 +59,14 @@ class P extends Element {
         "${children.map((el) => el.build()).join()}\n"
         "</p>\n";
   }
+
+  @override
+  P clone() => P(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 enum Target { self, blank, parent, top, unfencedTop }
@@ -101,6 +118,16 @@ class A extends Element {
         "${children.map((el) => el.build()).join()}"
         "</a>";
   }
+
+  @override
+  A clone() => A(
+    href: href,
+    children: cloneChildren(),
+    target: target,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Span extends Element {
@@ -124,6 +151,14 @@ class Span extends Element {
         '${children.map((el) => el.build()).join(" ")}'
         "</span>";
   }
+
+  @override
+  Span clone() => Span(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Summary extends Element {
@@ -147,6 +182,14 @@ class Summary extends Element {
         '${children.map((el) => el.build()).join("\n")}'
         "</summary>";
   }
+
+  @override
+  Summary clone() => Summary(
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Details extends Element {
@@ -167,6 +210,15 @@ class Details extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</details>";
   }
+
+  @override
+  Details clone() => Details(
+    summary: summary.clone(),
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Em extends Element {
@@ -180,6 +232,11 @@ class Em extends Element {
         "${children.map((el) => el.build()).join()}"
         "</em>";
   }
+
+  @override
+  Em clone() => Em(
+    children: cloneChildren(),
+  );
 }
 
 class Strong extends Element {
@@ -193,4 +250,9 @@ class Strong extends Element {
         "${children.map((el) => el.build()).join()}"
         "</strong>";
   }
+
+  @override
+  Strong clone() => Strong(
+    children: cloneChildren(),
+  );
 }

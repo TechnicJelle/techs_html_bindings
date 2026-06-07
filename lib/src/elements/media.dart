@@ -74,6 +74,20 @@ class Image extends Element {
     }
     return "";
   }
+
+  @override
+  Image clone() => Image(
+    src: src,
+    alt: alt,
+    width: width,
+    height: height,
+    loading: loading,
+    imageRoot: imageRoot,
+    autoSize: autoSize,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 enum VideoControl { noDownload, noFullscreen, noRemotePlayback }
@@ -162,6 +176,26 @@ class Video extends Element {
     }
     return "";
   }
+
+  @override
+  Video clone() => Video(
+    src: src,
+    width: width,
+    height: height,
+    autoplay: autoplay,
+    controls: controls,
+    controlsList: controlsList?.toSet(),
+    disablePictureInPicture: disablePictureInPicture,
+    disableRemotePlayback: disableRemotePlayback,
+    loop: loop,
+    muted: muted,
+    playsInline: playsInline,
+    tabFocusable: tabFocusable,
+    loading: loading,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Source extends Element {
@@ -186,6 +220,16 @@ class Source extends Element {
 
     return '<source srcset="$srcset"$modifiers />';
   }
+
+  @override
+  Source clone() => Source(
+    srcset: srcset,
+    media: media,
+    type: type,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Picture extends Element {
@@ -231,4 +275,13 @@ class Picture extends Element {
         "\t${image.build()}\n"
         "</picture>";
   }
+
+  @override
+  Picture clone() => Picture(
+    sources: sources.map((Source s) => s.clone()).toList(),
+    image: image.clone(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }

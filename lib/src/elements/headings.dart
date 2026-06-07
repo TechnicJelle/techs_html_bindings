@@ -67,6 +67,17 @@ abstract class Hn extends Element {
         '${thisChildren.map((el) => el.build()).join("\n")}'
         "</h$level>";
   }
+
+  @override
+  Hn clone() => Hn.fromLevel(
+    level: level,
+    children: cloneChildren(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+    autoID: autoID,
+    autoLink: autoLink,
+  );
 }
 
 class H1 extends Hn {
