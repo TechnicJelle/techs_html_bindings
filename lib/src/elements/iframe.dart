@@ -1,6 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
-import "package:techs_html_bindings/src/utils.dart";
+import "package:techs_html_bindings/src/internal_utils.dart";
 
 part "copyWith/iframe.dart";
 
@@ -12,8 +12,7 @@ enum ReferrerPolicy {
   sameOrigin("same-origin"),
   strictOrigin("strict-origin"),
   strictOriginWhenCrossOrigin("strict-origin-when-cross-origin"),
-  unsafeUrl("unsafe-url")
-  ;
+  unsafeUrl("unsafe-url");
 
   final String value;
 
@@ -36,8 +35,7 @@ enum Sandbox {
   allowStorageAccessByUserActivation("allow-storage-access-by-user-activation"),
   allowTopNavigation("allow-top-navigation"),
   allowTopNavigationByUserActivation("allow-top-navigation-by-user-activation"),
-  allowTopNavigationToCustomProtocols("allow-top-navigation-to-custom-protocols")
-  ;
+  allowTopNavigationToCustomProtocols("allow-top-navigation-to-custom-protocols");
 
   final String value;
 
@@ -95,4 +93,19 @@ class IFrame extends Element {
     }
     return "";
   }
+
+  @override
+  IFrame clone() => IFrame(
+    src: src,
+    title: title,
+    width: width,
+    height: height,
+    loading: loading,
+    allow: allow,
+    referrerPolicy: referrerPolicy,
+    sandbox: sandbox?.toSet(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: inlineStyles?.skip(1).toList(), //skip the `border:0`
+  );
 }

@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/internal_utils.dart";
 
 part "copyWith/quotes.dart";
 
@@ -23,6 +24,15 @@ class BlockQuote extends Element {
         '${children.map((el) => el.build()).join("\n")}'
         "</blockquote>";
   }
+
+  @override
+  BlockQuote clone() => BlockQuote(
+    children: cloneChildren(),
+    cite: cite,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class Q extends Element {
@@ -45,4 +55,13 @@ class Q extends Element {
         "${children.map((el) => el.build()).join()}"
         "</q>";
   }
+
+  @override
+  Q clone() => Q(
+    children: cloneChildren(),
+    cite: cite,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }

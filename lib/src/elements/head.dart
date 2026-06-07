@@ -1,6 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
-import "package:techs_html_bindings/utils.dart";
+import "package:techs_html_bindings/src/internal_utils.dart";
 
 part "copyWith/head.dart";
 
@@ -31,6 +31,14 @@ class Head extends Element {
         "$concatenated\n"
         "</head>";
   }
+
+  @override
+  Head clone() => Head(
+    title: title,
+    metas: metas?.map((Meta m) => m.clone()).toList(),
+    links: links?.map((Link l) => l.clone()).toList(),
+    styles: styles?.map((Style s) => s.clone()).toList(),
+  );
 }
 
 class Meta extends Element {
@@ -38,6 +46,12 @@ class Meta extends Element {
   String value;
 
   String? content;
+
+  Meta._(
+    this.key,
+    this.value,
+    this.content,
+  ) : super(children: []);
 
   Meta.name(
     String name, {
@@ -67,6 +81,13 @@ class Meta extends Element {
     }
     return '<meta $key="$value" />';
   }
+
+  @override
+  Meta clone() => Meta._(
+    key,
+    value,
+    content,
+  );
 }
 
 enum PreloadType {
@@ -81,6 +102,12 @@ enum PreloadType {
 class Link extends Element {
   String rel;
   String href;
+
+  Link._(
+    this.rel,
+    this.href, {
+    required super.args,
+  }) : super(children: []);
 
   Link.icon({
     required String? type,
@@ -134,6 +161,13 @@ class Link extends Element {
   String build() {
     return '<link rel="$rel" href="$href"${args.args()} />';
   }
+
+  @override
+  Link clone() => Link._(
+    rel,
+    href,
+    args: cloneArgs(),
+  );
 }
 
 class Style extends Element {
@@ -149,4 +183,9 @@ class Style extends Element {
         "${css.trim()}\n"
         "</style>";
   }
+
+  @override
+  Style clone() => Style(
+    css: css,
+  );
 }

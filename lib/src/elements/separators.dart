@@ -7,4 +7,7 @@ class Hr extends Element {
   String build() {
     return "<hr />";
   }
+
+  @override
+  Hr clone() => Hr();
 }

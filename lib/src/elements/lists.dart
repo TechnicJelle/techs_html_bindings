@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/internal_utils.dart";
 
 part "copyWith/lists.dart";
 
@@ -31,6 +32,15 @@ class ListItem extends Element {
         '${children.map((el) => el.build()).join("\n")}'
         "</li>";
   }
+
+  @override
+  ListItem clone() => ListItem(
+    children: cloneChildren(),
+    value: value,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 class UnorderedList extends Element {
@@ -49,6 +59,14 @@ class UnorderedList extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</ul>";
   }
+
+  @override
+  UnorderedList clone() => UnorderedList(
+    items: items.map((e) => e.clone()).toList(),
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }
 
 enum OrderedListType {
@@ -56,8 +74,7 @@ enum OrderedListType {
   uppercaseLetters("A"),
   lowercaseRomanNumerals("i"),
   uppercaseRomanNumerals("I"),
-  numbers("1")
-  ;
+  numbers("1");
 
   final String value;
 
@@ -85,4 +102,13 @@ class OrderedList extends Element {
         '${children.map((el) => el.build()).join("\n")}\n'
         "</ol>";
   }
+
+  @override
+  OrderedList clone() => OrderedList(
+    items: items.map((e) => e.clone()).toList(),
+    type: type,
+    id: id,
+    classes: cloneClasses(),
+    inlineStyles: cloneInlineStyles(),
+  );
 }

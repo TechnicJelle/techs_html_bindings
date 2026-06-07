@@ -1,5 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
+import "package:techs_html_bindings/src/internal_utils.dart";
 import "package:techs_html_bindings/utils.dart";
 
 part "copyWith/base.dart";
@@ -22,6 +23,9 @@ abstract class Element {
   String get modifiers => "${id.id()}${classes.classes()}${inlineStyles.styles()}${args.args()}";
 
   String build();
+
+  /// Makes a deep copy of the element
+  Element clone();
 
   void collectChildrenOfType<E>({required List<E> into}) {
     children.collectOfType(into: into);
@@ -65,4 +69,11 @@ class HTML extends Element {
         "${body.build()}\n"
         "</html>";
   }
+
+  @override
+  HTML clone() => HTML(
+    lang: lang,
+    head: head.clone(),
+    body: body.clone(),
+  );
 }
