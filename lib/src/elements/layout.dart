@@ -1,6 +1,6 @@
 import "package:meta/meta.dart";
 import "package:techs_html_bindings/elements.dart";
-import "package:techs_html_bindings/utils.dart";
+import "package:techs_html_bindings/src/internal_utils.dart";
 
 part "copyWith/layout.dart";
 
