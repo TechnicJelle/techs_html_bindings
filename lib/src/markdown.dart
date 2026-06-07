@@ -113,6 +113,9 @@ class Nothing extends html.Element {
 
   @override
   String build() => "";
+
+  @override
+  html.Element clone() => Nothing();
 }
 
 extension _AttrGetters on Map<String, String> {
