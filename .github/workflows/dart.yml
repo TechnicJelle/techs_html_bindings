@@ -24,6 +24,9 @@ jobs:
       - name: Run tests
         run: dart test
 
+      - name: Run example
+        run: dart run example/example.dart
+
   format:
     runs-on: ubuntu-latest
     steps:
