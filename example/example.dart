@@ -67,6 +67,12 @@ h2:hover > a.link, h3:hover > a.link, h4:hover > a.link {
         ),
         main: Main(
           children: [
+            Image(
+              src: "https://technicjelle.com/images/logo-128.gif",
+              alt:
+                  "TechnicJelle's logo. It depicts a spinning gear that gives off sparks. The text \"TechnicJelle\" is overlaid with textured blue letters.",
+              title: "Nyoom!",
+            ),
             ...markdown(File("README.md").readAsStringSync()),
           ],
         ),
