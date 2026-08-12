@@ -19,6 +19,7 @@ enum Loading {
 class Image extends Element {
   String src;
   String alt;
+  String? title;
   int? width;
   int? height;
   Loading? loading;
@@ -34,6 +35,7 @@ class Image extends Element {
   Image({
     required this.src,
     required this.alt,
+    this.title,
     this.width,
     this.height,
     this.loading,
@@ -50,6 +52,7 @@ class Image extends Element {
     final String imageSize = this.imageSize;
     String modifiers = this.modifiers;
     if (loading != null) modifiers += ' loading="${loading!.name}"';
+    if (title != null) modifiers += ' title="${title!}"';
     return '<img src="$src" alt="${alt.escape()}"$imageSize$modifiers />';
   }
 
