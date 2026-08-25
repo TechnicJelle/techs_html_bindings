@@ -8,6 +8,7 @@ part "copyWith/headings.dart";
 
 abstract class Hn extends Element {
   ///Override this if you want the automatic links to have a different class.
+  ///Set to an empty string to disable the entire auto-link feature.
   static String autoLinkClass = "link";
 
   ///Override this if you want to display something else than a 🔗 as the link.
@@ -57,7 +58,7 @@ abstract class Hn extends Element {
   String build() {
     final Iterable<Element> thisChildren = [
       ...children,
-      if (autoLink && id != null)
+      if (autoLink && id != null && autoLinkClass.isNotEmpty)
         A(
           classes: [autoLinkClass],
           href: "#${id!}",
