@@ -7,7 +7,7 @@ environment:
   sdk: ^3.12.1
 
 dependencies:
-  html: ^0.15.6
+  html: ^0.15.7
   image: ^4.9.2
   markdown: ^7.3.1
   meta: ^1.19.0
